@@ -1,5 +1,7 @@
 <template>
   <div id="login">
+    <button @click="changeRouter">切换路由</button>
+
     <div :class="type == 1 ? 'login-wrap login-wrap-bg' : 'login-wrap' " v-if='type == 0 ? true : false'>
       <!-- 登录 -->
       <div class="login-wrap-bottom" v-if='type == 0 ? true : false'>
@@ -145,8 +147,7 @@
       </div>
     </div>
 
-
-      <div class="login-all">by LittleChai</div>
+    <div class="login-all">by LittleChai</div>
     <!-- </div> -->
   </div>
 </template>
@@ -179,6 +180,16 @@ export default {
   },
   props: {},
   methods: {
+    changeRouter() {
+      this.$router.push({
+        name: 'test',
+        params: {
+          id: 'test',
+          test: '啦啦啦'
+        }
+      })
+    },
+
     // 更改登录类别
     changeType(val) {
       this.type = val;
@@ -346,7 +357,7 @@ export default {
 #login {
   width: 100%;
   height: 100%;
-  background: url(../../static/images/111.jpg);
+  background: url(../../static/images/login.png);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -435,7 +446,7 @@ export default {
   border: none;
   width: 100%;
   color: black;
-  /* background-color: rgba(255, 255, 255, 0); */
+  background-color: rgba(255, 255, 255, 1);
 }
 
 .forget-password {

@@ -6,6 +6,7 @@ import Vant from 'vant'
 import axios from './http.js'
 import 'vant/lib/index.css'
 import md5 from 'js-md5'
+import echarts from 'echarts'
 
 Vue.config.productionTip = false
 
@@ -14,6 +15,7 @@ Vue.use(Vant);
 
 Vue.prototype.$http = axios;
 Vue.prototype.md5 = md5;
+Vue.prototype.echarts = echarts
 
 
 new Vue({

@@ -8,7 +8,9 @@ module.exports = {
         // open: true, //配置自动启动浏览器
         proxy: {
             '/api': {
-                target: 'http://hd215.api.yesapi.cn/', //对应自己的接口
+                //对应自己的接口
+                // target: 'http://hd215.api.yesapi.cn/', 
+                target: 'http://192.168.1.118:3000',
                 changeOrigin: true,
                 ws: true,
                 pathRewrite: {

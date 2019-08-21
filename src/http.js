@@ -7,7 +7,8 @@ export default{
       url = url || ''  
       axios({
         method: "GET",
-        url: '/api'+ `${url}?s=${param.s}&username=${param.username}&password=${param.password}&app_key=${param.app_key}`,
+        // url: '/api'+ `${url}?s=${param.s}&username=${param.username}&password=${param.password}&app_key=${param.app_key}`,
+        url: '/api' + url,
         data: param
       }).then(res => {
         var res_code = res.status.toString();

@@ -7,6 +7,12 @@
         <button @click="$store.commit('getText1')">获得数据: </button>  
         <span>text1: {{text1}} </span>
 
+        <div class='div1'>
+            <h1>哈哈哈 <a href="##">嘻嘻嘻</a> </h1>
+            <h2>啦啦啦 <a href="##">嘻嘻嘻</a></h2>
+            <h3>呵呵呵 <a href="##">嘻嘻嘻</a></h3>
+        </div>
+
         <chart :childData='childData' class="echarts" @toFatherFn='getToFatherData'></chart>
     </div>
 </template>>
@@ -79,7 +85,12 @@ export default {
 </script>
 
 
-<style scoped>
+<style scoped lang='scss'>
+    $redColor: red;
+    $blueColor: blue;
+
+    $blueBorder: 1px solid $blueColor;
+
     .test {
         position: fixed;
         top: 0;
@@ -88,6 +99,7 @@ export default {
         bottom: 0;
         background-color: rgb(222, 222, 222);
         overflow-y: auto;
+        color: $blueColor;
     }
 
     .echarts {
@@ -96,5 +108,24 @@ export default {
         height: auto;
         right: 0;
         top: 20px;
+        border: $blueBorder;
+    }
+
+    .div1 {
+        width: 500px;
+        height: 300px;
+        margin: 20px;
+
+        h1,h2,h3 {
+            color: black;
+            font-size: 20px;
+            padding: 3px;
+        }
+
+        h1 a {
+            &:hover {
+                color: pink;
+            }
+        }
     }
 </style>

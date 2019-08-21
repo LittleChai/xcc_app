@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import login from '../components/login.vue'
 import test from '../components/test.vue'
+import ball from '../components/ball.vue'
 
 Vue.use(Router)
 
@@ -9,7 +10,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/test'
+      redirect: '/login'
     },
     {
       path: '/test',
@@ -21,6 +22,11 @@ export default new Router({
       name: 'login',
       component: login
     },
+    {
+      path: '/ball',
+      name: 'ball',
+      component: ball
+    }
     // {
     //   path: '/about',
     //   name: 'about',

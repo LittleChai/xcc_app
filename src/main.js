@@ -2,16 +2,15 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router/index.js'
 import store from './store/index.js'
-import Vant from 'vant'
 import axios from './http.js'
-import 'vant/lib/index.css'
 import md5 from 'js-md5'
 import echarts from 'echarts'
+import iview from 'iview'
+import 'iview/dist/styles/iview.css'
 
 Vue.config.productionTip = false
 
-Vue.use(Vant);
-// Vue.use(md5);
+Vue.use(iview);
 
 Vue.prototype.$http = axios;
 Vue.prototype.md5 = md5;

@@ -4,16 +4,17 @@
 
     <div
       :class="type == 1 ? 'login-wrap login-wrap-bg' : 'login-wrap' "
-      v-if="type == 0 ? true : false"
+      v-show="type == 0 ? true : false"
     >
-    <div class="square1"></div>
-    <div class="square2"></div>
+      <div class="square1"></div>
+      <div class="square2"></div>
       <!-- 登录 -->
-      <div class="login-wrap-bottom" v-if="type == 0 ? true : false">
+      <div class="login-wrap-bottom" v-show="type == 0 ? true : false">
         <p>用户登录</p>
         <div class="login-wrap-input">
           <span class="login-wrap-icon">
-            <img src="../../static/images/user.svg" alt />
+            <!-- <img src="../../static/images/user.svg" alt /> -->
+            <Icon type="md-paw" color='#e87a90' size='20'/>
           </span>
           <span class="login-wrap-input1">
             <input
@@ -22,7 +23,7 @@
               @keyup.enter="login"
               v-model="userName"
               maxlength="20"
-              @blur="blurBorder(0)" 
+              @blur="blurBorder(0)"
               @focus="focusBorder(0)"
             />
           </span>
@@ -30,7 +31,8 @@
         </div>
         <div class="login-wrap-input">
           <span class="login-wrap-icon">
-            <img src="../../static/images/password.svg" alt />
+            <!-- <img src="../../static/images/password.svg" alt /> -->
+            <Icon type="md-lock" color='#e87a90' size='20'/>
           </span>
           <span class="login-wrap-input1">
             <input
@@ -39,40 +41,41 @@
               @keyup.enter="login"
               v-model="password"
               maxlength="20"
-              @blur="blurBorder(1)" 
+              @blur="blurBorder(1)"
               @focus="focusBorder(1)"
             />
           </span>
           <span class="input_hover"></span>
         </div>
         <div class="forget-password zhuce" @click="changeType(1)">用户注册</div>
-        <div class="forget-password" @click="changeType(2)">忘记密码</div>
+        <div class="forget-password" @click="changeType(2)">修改密码</div>
 
-        <van-button type="info" class="login-btn" @click="login">登录</van-button>
+        <Button type="info" class="login-btn" @click="login" :loading="loading">登录</Button>
       </div>
     </div>
 
     <div
       :class="type == 1 ? 'login-wrap login-wrap-bg' : 'login-wrap' "
-      v-if="type == 1 ? true : false"
+      v-show="type == 1 ? true : false"
     >
-    <div class="square1"></div>
-    <div class="square2"></div>
+      <div class="square1"></div>
+      <div class="square2"></div>
       <!-- 注册 -->
-      <div class="login-wrap-bottom" v-if="type == 1 ? true : false">
+      <div class="login-wrap-bottom" v-show="type == 1 ? true : false">
         <p>用户注册</p>
         <div class="login-wrap-input">
           <span class="login-wrap-icon">
-            <img src="../../static/images/user.svg" alt />
+            <!-- <img src="../../static/images/user.svg" alt /> -->
+            <Icon type="md-paw" color='#e87a90' size='20'/>
           </span>
           <span class="login-wrap-input1">
             <input
               type="text"
-              placeholder="请输入账号"
+              placeholder="请输入账号(字母或者数字组合)"
               @keyup.enter="register"
               v-model="userName1"
               maxlength="20"
-              @blur="blurBorder(0)" 
+              @blur="blurBorder(0)"
               @focus="focusBorder(0)"
             />
           </span>
@@ -80,16 +83,17 @@
         </div>
         <div class="login-wrap-input">
           <span class="login-wrap-icon">
-            <img class="icon-email" src="../../static/images/email.svg" alt />
+            <!-- <img class="icon-email" src="../../static/images/email.svg" alt /> -->
+            <Icon type="ios-mail-open" color='#e87a90' size='20'/>
           </span>
           <span class="login-wrap-input1">
             <input
               type="text"
-              placeholder="请输入邮箱(用于找回密码)"
+              placeholder="请输入邮箱"
               @keyup.enter="register"
               v-model="email1"
               maxlength="20"
-              @blur="blurBorder(1)" 
+              @blur="blurBorder(1)"
               @focus="focusBorder(1)"
             />
           </span>
@@ -97,16 +101,17 @@
         </div>
         <div class="login-wrap-input">
           <span class="login-wrap-icon">
-            <img src="../../static/images/password.svg" alt />
+            <!-- <img src="../../static/images/password.svg" alt /> -->
+            <Icon type="md-lock" color='#e87a90' size='20'/>
           </span>
           <span class="login-wrap-input1">
             <input
               type="password"
-              placeholder="请输入密码"
+              placeholder="请输入密码(6位或6位以上)"
               @keyup.enter="register"
               v-model="password1"
               maxlength="20"
-              @blur="blurBorder(2)" 
+              @blur="blurBorder(2)"
               @focus="focusBorder(2)"
             />
           </span>
@@ -114,7 +119,8 @@
         </div>
         <div class="login-wrap-input">
           <span class="login-wrap-icon">
-            <img src="../../static/images/password.svg" alt />
+            <!-- <img src="../../static/images/password.svg" alt /> -->
+            <Icon type="md-lock" color='#e87a90' size='20'/>
           </span>
           <span class="login-wrap-input1">
             <input
@@ -123,40 +129,41 @@
               @keyup.enter="register"
               v-model="password11"
               maxlength="20"
-              @blur="blurBorder(3)" 
+              @blur="blurBorder(3)"
               @focus="focusBorder(3)"
             />
           </span>
           <span class="input_hover"></span>
         </div>
         <div class="forget-password zhuce" @click="changeType(0)">用户登录</div>
-        <div class="forget-password" @click="changeType(2)">忘记密码</div>
+        <div class="forget-password" @click="changeType(2)">修改密码</div>
 
-        <van-button type="info" class="login-btn" @click="register">注册</van-button>
+        <Button type="info" class="login-btn" @click="register" :loading="loading1">注册</Button>
       </div>
     </div>
 
     <div
-      :class="type == 1 ? 'login-wrap login-wrap-bg' : 'login-wrap' "
-      v-if="type == 2 ? true : false"
+      :class="type == 1 ? 'login-wrap login-wrap-bg' : 'login-wrap login-wrap-md' "
+      v-show="type == 2 ? true : false"
     >
-    <div class="square1"></div>
-    <div class="square2"></div>
+      <div class="square1"></div>
+      <div class="square2"></div>
       <!-- 忘记密码 -->
-      <div class="login-wrap-bottom" v-if="type == 2 ? true : false">
-        <p>忘记密码</p>
+      <div class="login-wrap-bottom" v-show="type == 2 ? true : false">
+        <p>修改密码</p>
         <div class="login-wrap-input">
           <span class="login-wrap-icon">
-            <img class="icon-email" src="../../static/images/email.svg" alt />
+            <!-- <img class="icon-email" src="../../static/images/email.svg" alt /> -->
+            <Icon type="md-paw" color='#e87a90' size='20'/>
           </span>
           <span class="login-wrap-input1">
             <input
               type="text"
-              placeholder="请输入邮箱"
+              placeholder="请输入用户名"
               @keyup.enter="find"
-              v-model="email2"
+              v-model="userName2"
               maxlength="20"
-              @blur="blurBorder(0)" 
+              @blur="blurBorder(0)"
               @focus="focusBorder(0)"
             />
           </span>
@@ -164,16 +171,35 @@
         </div>
         <div class="login-wrap-input">
           <span class="login-wrap-icon">
-            <img src="../../static/images/password.svg" alt />
+            <!-- <img src="../../static/images/password.svg" alt /> -->
+            <Icon type="md-lock" color='#e87a90' size='20'/>
           </span>
           <span class="login-wrap-input1">
             <input
               type="password"
-              placeholder="请输入验证码"
+              placeholder="请输入当前密码"
               @keyup.enter="find"
-              v-model="code2"
+              v-model="oldPassword2"
               maxlength="20"
-              @blur="blurBorder(1)" 
+              @blur="blurBorder(1)"
+              @focus="focusBorder(1)"
+            />
+          </span>
+          <span class="input_hover"></span>
+        </div>
+        <div class="login-wrap-input">
+          <span class="login-wrap-icon">
+            <!-- <img src="../../static/images/password.svg" alt /> -->
+            <Icon type="md-lock" color='#e87a90' size='20'/>
+          </span>
+          <span class="login-wrap-input1">
+            <input
+              type="password"
+              placeholder="请输入新密码"
+              @keyup.enter="find"
+              v-model="newPassword2"
+              maxlength="20"
+              @blur="blurBorder(1)"
               @focus="focusBorder(1)"
             />
           </span>
@@ -182,7 +208,7 @@
         <div class="forget-password zhuce" @click="changeType(1)">用户注册</div>
         <div class="forget-password" @click="changeType(0)">用户登录</div>
 
-        <van-button type="info" class="login-btn" @click="find">确认</van-button>
+        <Button type="info" class="login-btn" @click="find" :loading="loading2">确认</Button>
       </div>
     </div>
 
@@ -193,25 +219,27 @@
 
 <script>
 import Vue from "vue";
-import { Notify } from "vant";
 
-Vue.use(Notify);
 export default {
   name: "login",
   data() {
     return {
-      userName: "admin",
-      password: "123456",
+      userName: "",
+      password: "",
+      loading: false,
 
       userName1: "",
       email1: "",
       password1: "",
       password11: "",
+      loading1: false,
 
-      email2: "",
-      code2: "",
+      userName2: "",
+      oldPassword2: "",
+      newPassword2: "",
+      loading2: false,
       // email: ""
-      type: 1
+      type: 0
       // 0: 登录
       // 1: 注册
       // 2: 忘记密码
@@ -221,11 +249,11 @@ export default {
   methods: {
     blurBorder(e) {
       // console.log(e);
-      document.getElementsByClassName('input_hover')[e].style.width = '0%';
+      document.getElementsByClassName("input_hover")[e].style.width = "0%";
     },
     focusBorder(e) {
       // console.log(e);
-      document.getElementsByClassName('input_hover')[e].style.width = '100%';
+      document.getElementsByClassName("input_hover")[e].style.width = "100%";
     },
 
     changeRouter() {
@@ -246,89 +274,54 @@ export default {
     // 注册
     register() {
       if (this.userName1 == "") {
-        Notify({
-          message: "请输入帐号",
-          duration: 1000,
-          background: "#ff8f68"
-        });
+        this.$Message.warning("请输入帐号");
       } else if (this.email1 == "") {
-        Notify({
-          message: "请输入邮箱",
-          duration: 1000,
-          background: "#ff8f68"
-        });
+        this.$Message.warning("请输入邮箱");
       } else if (this.password1 == "") {
-        Notify({
-          message: "请输入密码",
-          duration: 1000,
-          background: "#ff8f68"
-        });
+        this.$Message.warning("请输入密码");
       } else if (this.password11 == "") {
-        Notify({
-          message: "请确认密码",
-          duration: 1000,
-          background: "#ff8f68"
-        });
+        this.$Message.warning("请确认密码");
       } else {
         let reg = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
-        if (this.userName1.length < 7) {
-          Notify({
-            message: "用户名长度不能小于7位",
-            duration: 1000,
-            background: "#ff8f68"
-          });
+        var reg1 = new RegExp("[\\u4E00-\\u9FFF]+","g");
+        if (this.userName1.length < 6) {
+          this.$Message.warning("用户名长度不能小于6位");
+        } else if (reg1.test(this.userName1)) {
+          this.$Message.warning("用户名只能是字母或数字");
         } else if (!reg.test(this.email1)) {
-          Notify({
-            message: "请输入正确的邮箱",
-            duration: 1000,
-            background: "#ff8f68"
-          });
-        } else if (this.password1.length < 7) {
-          Notify({
-            message: "密码长度不能小于7位",
-            duration: 1000,
-            background: "#ff8f68"
-          });
+          this.$Message.warning("请输入正确的邮箱");
+        } else if (this.password1.length < 6) {
+          this.$Message.warning("密码长度不能小于6位");
         } else if (this.password1 != this.password11) {
-          Notify({
-            message: "两次输入的密码不一致",
-            duration: 1000,
-            background: "#ff8f68"
-          });
+          this.$Message.warning("两次输入的密码不一致");
         } else {
-          Notify({
-            message: "正在注册",
-            duration: 1000,
-            background: "#1989fa"
-          });
+          // this.$Message.loading('正在注册');
+
+          this.loading1 = true;
 
           this.$http
-            .get("", {
-              s: "App.User.Register",
+            .post("/register", {
+              s: 'App.User.Register',
               username: this.userName1,
               password: this.md5(this.password1),
-              app_key: "8BCC051034B77818A7732EBF575F1DC2",
-              ext_info: { email: this.email1 }
+              ext_info: JSON.stringify({'email':this.email1})
             })
             .then(res => {
               console.log(res);
-              if (res.data.data.err_code == 0) {
-                Notify({
-                  message: "注册成功",
-                  duration: 1000,
-                  background: "#1989fa"
-                });
-                this.type = 0;
-              } else if (res.data.data.err_code == 1) {
-                Notify({
-                  message: res.data.data.err_msg,
-                  duration: 1000,
-                  background: "#ff8f68"
-                });
+              this.loading1 = false;
+              if (res.data.err_code == 0) {
+                this.$Message.success("注册成功");
+                this.userName1 = "";
+                this.email1 = "";
+                this.password1 = "";
+                this.password11 = "";  
+              } else {
+                this.$Message.warning(res.data.err_msg);
               }
             })
             .catch(res => {
               console.log(res);
+              this.loading1 = false;
             });
         }
       }
@@ -337,43 +330,72 @@ export default {
     // 登录
     login() {
       if (this.userName == "") {
-        Notify({
-          message: "请输入帐号",
-          duration: 1000,
-          background: "#ff8f68"
-        });
+        this.$Message.warning("请输入帐号");
       } else if (this.password == "") {
-        Notify({
-          message: "请输入密码",
-          duration: 1000,
-          background: "#ff8f68"
-        });
+        this.$Message.warning("请输入密码");
       } else {
-        if (this.userName != "admin" || this.password != "123456") {
-          Notify({
-            message: "请输入正确的帐号密码",
-            duration: 1000,
-            background: "#ff8f68"
-          });
-        } else {
-          Notify({
-            message: "登录成功",
-            duration: 1000,
-            background: "#1989fa"
-          });
-
-          this.$http.get('/login').then(res => {
-            console.log(res)
-          }).catch(res => {
-            console.log(res)
-          })
-        }
+        this.loading = true;
+        this.$http.post('/login',{
+          s: 'App.User.Login',
+          username: this.userName,
+          password: this.md5(this.password),
+        })
+        .then(res => {
+          console.log(res);
+          if(res.data.err_code == 0) {
+            this.$Message.success("登录成功");
+            let info = {
+              uuid: res.data.uuid,
+              token: res.data.token
+            }
+            localStorage.setItem('info',JSON.stringify(info))
+          }else {
+            this.$Message.warning(res.data.err_msg);
+          }
+          this.loading = false;
+        })
+        .catch(res => {
+          console.log(res);
+          this.loading = false;
+        })
       }
     },
 
-    // 找回密码
+    // 修改密码
     find() {
-
+      if (this.userName2 == "") {
+        this.$Message.warning("请输入帐号");
+      } else if (this.oldPassword2 == "") {
+        this.$Message.warning("请输入当前密码");
+      } else if (this.newPassword2 == "") {
+        this.$Message.warning("请输入新密码");
+      } else {
+        this.loading2 = true;
+        this.$http.post('/changePassword',{
+          s: 'App.User.AlterPassword',
+          username: this.userName2,
+          old_password: this.md5(this.oldPassword2),
+          new_password: this.md5(this.newPassword2)
+        })
+        .then(res => {
+          console.log(res);
+          if(res.data.err_code == 0) {
+            this.$Message.success("修改成功，请重新登录");
+            this.userName2 = '';
+            this.oldPassword2 = '';
+            this.newPassword2 = '';
+            this.type = 0;
+            localStorage.removeItem('info')
+          }else {
+            this.$Message.warning(res.data.err_msg);
+          }
+          this.loading2 = false;
+        })
+        .catch(res => {
+          console.log(res);
+          this.loading2 = false;
+        })
+      }
     }
   },
   mounted() {
@@ -430,6 +452,12 @@ export default {
   transition: all 0.3s ease;
 }
 
+.login-wrap-md {
+  height: 300px;
+  top: 35%;
+  transition: all 0.3s ease;
+}
+
 .login-wrap-bottom {
   width: 100%;
   height: 100%;
@@ -442,14 +470,14 @@ export default {
 .login-wrap-bottom p {
   color: #fff;
   position: relative;
-  top: -36px;
+  top: -40px;
   font-size: 15px;
 }
 
 .login-wrap-bottom .login-btn {
   width: 85%;
   position: relative;
-  top: 24px;
+  top: 36px;
   height: 40px;
   cursor: pointer;
 }
@@ -460,7 +488,7 @@ export default {
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  margin: 5px 0 3px 0;
+  margin: 5px 0 8px 0;
   padding: 2px 0 8px 0;
   position: relative;
   top: -16px;
@@ -490,6 +518,8 @@ export default {
 
 .login-wrap-bottom .login-wrap-icon {
   width: 30px;
+  position: relative;
+  top: 2px;
 }
 
 .login-wrap-bottom .login-wrap-icon img {
@@ -505,8 +535,9 @@ export default {
 
 .login-wrap-bottom .login-wrap-input1 {
   width: 220px;
-  position: relative;
-  left: 8px;
+  position: absolute;
+  left: 28px;
+  top: 5px;
   display: inline-block;
 }
 
@@ -519,7 +550,6 @@ export default {
   color: #fff;
   background-color: rgba(255, 255, 255, 0);
   position: relative;
-
 }
 
 .login-wrap-bottom .input_hover {
@@ -529,7 +559,7 @@ export default {
   height: 1px;
   width: 0%;
   background-color: #fff;
-  transition: all .3s ease;
+  transition: all 0.3s ease;
 }
 
 .forget-password {
@@ -542,6 +572,14 @@ export default {
   font-size: 12px;
   cursor: pointer;
   /* transition: all 0.2s ease; */
+}
+
+.login-wrap-bg .forget-password {
+  bottom: 98px;
+}
+
+.login-wrap-md .forget-password {
+  bottom: 94px;
 }
 
 .zhuce {
@@ -566,28 +604,28 @@ export default {
 }
 
 .square1 {
- width: 0; 
- height: 0;
- border-width: 28px;
- border-style: solid;
-//  border-color:#e257b7  transparent transparent transparent;
- border-color:rgba(255, 255, 255, 0)  transparent transparent transparent;
- transform:  rotate(-135deg);
- position: absolute;
- right: -28px;
- top: -28px;
+  width: 0;
+  height: 0;
+  border-width: 28px;
+  border-style: solid;
+  //  border-color:#e257b7  transparent transparent transparent;
+  border-color: rgba(255, 255, 255, 0) transparent transparent transparent;
+  transform: rotate(-135deg);
+  position: absolute;
+  right: -28px;
+  top: -28px;
 }
 
 .square2 {
- width: 0; 
- height: 0;
- border-width: 28px;
- border-style: solid;
-//  border-color:rgba(228, 121, 255, 1) transparent transparent transparent;
- border-color:rgba(255, 255, 255, 0)  transparent transparent transparent;
- transform:  rotate(45deg);
- position: absolute;
- left: -28px;
- bottom: -28px;
+  width: 0;
+  height: 0;
+  border-width: 28px;
+  border-style: solid;
+  //  border-color:rgba(228, 121, 255, 1) transparent transparent transparent;
+  border-color: rgba(255, 255, 255, 0) transparent transparent transparent;
+  transform: rotate(45deg);
+  position: absolute;
+  left: -28px;
+  bottom: -28px;
 }
 </style>

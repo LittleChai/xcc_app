@@ -9,8 +9,8 @@ module.exports = {
         proxy: {
             '/api': {
                 //对应自己的接口
-                // target: 'http://hd215.api.yesapi.cn/', 
-                target: 'http://192.168.1.118:3000',
+                // target: 'http://192.168.1.118:3000',
+                target: 'http://localhost:3000',
                 changeOrigin: true,
                 ws: true,
                 pathRewrite: {

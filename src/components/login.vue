@@ -14,7 +14,7 @@
         <div class="login-wrap-input">
           <span class="login-wrap-icon">
             <!-- <img src="../../static/images/user.svg" alt /> -->
-            <Icon type="md-paw" color='#e87a90' size='20'/>
+            <Icon type="md-paw" color='#f8b3f1' size='20'/>
           </span>
           <span class="login-wrap-input1">
             <input
@@ -32,7 +32,7 @@
         <div class="login-wrap-input">
           <span class="login-wrap-icon">
             <!-- <img src="../../static/images/password.svg" alt /> -->
-            <Icon type="md-lock" color='#e87a90' size='20'/>
+            <Icon type="md-lock" color='#f8b3f1' size='20'/>
           </span>
           <span class="login-wrap-input1">
             <input
@@ -66,7 +66,7 @@
         <div class="login-wrap-input">
           <span class="login-wrap-icon">
             <!-- <img src="../../static/images/user.svg" alt /> -->
-            <Icon type="md-paw" color='#e87a90' size='20'/>
+            <Icon type="md-paw" color='#f8b3f1' size='20'/>
           </span>
           <span class="login-wrap-input1">
             <input
@@ -84,7 +84,7 @@
         <div class="login-wrap-input">
           <span class="login-wrap-icon">
             <!-- <img class="icon-email" src="../../static/images/email.svg" alt /> -->
-            <Icon type="ios-mail-open" color='#e87a90' size='20'/>
+            <Icon type="ios-mail-open" color='#f8b3f1' size='20'/>
           </span>
           <span class="login-wrap-input1">
             <input
@@ -102,7 +102,7 @@
         <div class="login-wrap-input">
           <span class="login-wrap-icon">
             <!-- <img src="../../static/images/password.svg" alt /> -->
-            <Icon type="md-lock" color='#e87a90' size='20'/>
+            <Icon type="md-lock" color='#f8b3f1' size='20'/>
           </span>
           <span class="login-wrap-input1">
             <input
@@ -120,7 +120,7 @@
         <div class="login-wrap-input">
           <span class="login-wrap-icon">
             <!-- <img src="../../static/images/password.svg" alt /> -->
-            <Icon type="md-lock" color='#e87a90' size='20'/>
+            <Icon type="md-lock" color='#f8b3f1' size='20'/>
           </span>
           <span class="login-wrap-input1">
             <input
@@ -154,7 +154,7 @@
         <div class="login-wrap-input">
           <span class="login-wrap-icon">
             <!-- <img class="icon-email" src="../../static/images/email.svg" alt /> -->
-            <Icon type="md-paw" color='#e87a90' size='20'/>
+            <Icon type="md-paw" color='#f8b3f1' size='20'/>
           </span>
           <span class="login-wrap-input1">
             <input
@@ -172,7 +172,7 @@
         <div class="login-wrap-input">
           <span class="login-wrap-icon">
             <!-- <img src="../../static/images/password.svg" alt /> -->
-            <Icon type="md-lock" color='#e87a90' size='20'/>
+            <Icon type="md-lock" color='#f8b3f1' size='20'/>
           </span>
           <span class="login-wrap-input1">
             <input
@@ -190,7 +190,7 @@
         <div class="login-wrap-input">
           <span class="login-wrap-icon">
             <!-- <img src="../../static/images/password.svg" alt /> -->
-            <Icon type="md-lock" color='#e87a90' size='20'/>
+            <Icon type="md-lock" color='#f8b3f1' size='20'/>
           </span>
           <span class="login-wrap-input1">
             <input
@@ -434,7 +434,7 @@ export default {
 .login-wrap {
   width: 320px;
   height: 255px;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 1);
   position: absolute;
   top: 35%;
   left: 50%;
@@ -468,10 +468,11 @@ export default {
 }
 
 .login-wrap-bottom p {
-  color: #fff;
+  color: rgb(45, 183, 245);
+  font-weight: bold;
   position: relative;
-  top: -40px;
-  font-size: 15px;
+  top: -36px;
+  font-size: 16px;
 }
 
 .login-wrap-bottom .login-btn {
@@ -487,8 +488,8 @@ export default {
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  margin: 5px 0 8px 0;
+  border-bottom: 2px solid rgba(45,183,245,0.1);
+  margin: 6px 0 8px 0;
   padding: 2px 0 8px 0;
   position: relative;
   top: -16px;
@@ -545,20 +546,22 @@ export default {
   outline: none;
   font-size: 14px;
   letter-spacing: 1px;
+  word-spacing: 1px;
   border: none;
   width: 100%;
-  color: #fff;
-  background-color: rgba(255, 255, 255, 0);
+  color: rgb(45, 183, 245);
+  background-color: transparent!important;
   position: relative;
+  font-weight: 400;
 }
 
 .login-wrap-bottom .input_hover {
   position: absolute;
   left: 0;
-  bottom: -1px;
-  height: 1px;
+  bottom: -2px;
+  height: 2px;
   width: 0%;
-  background-color: #fff;
+  background-color: rgb(45,183,245);
   transition: all 0.3s ease;
 }
 
@@ -567,15 +570,15 @@ export default {
   width: 55px;
   right: 18px;
   bottom: 90px;
-  color: rgb(45, 183, 245);
+  color: #f8b3f1;
   font-weight: bold;
   font-size: 12px;
   cursor: pointer;
-  /* transition: all 0.2s ease; */
+  transition: all 0.2s ease;
 }
 
 .login-wrap-bg .forget-password {
-  bottom: 98px;
+  bottom: 92px;
 }
 
 .login-wrap-md .forget-password {

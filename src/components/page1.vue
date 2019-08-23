@@ -1,0 +1,107 @@
+<template id='page1'>
+    <div class="page">
+
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+        <p>111</p>
+
+    </div>
+</template>
+
+<script>
+export default {
+    name: 'page1',
+    data() {
+        return {
+
+        }
+    },
+    methods: {
+
+    },
+    beforeCreate() {
+
+    },
+    created() {
+
+    },
+    beforeMount() {
+
+    },
+    mounted() {
+
+    },
+    beforeUpdate() {
+
+    },
+    updated() {
+
+    },
+    beforeDestroy() {
+
+    },
+    destroyed() {
+        
+    }
+
+}
+</script>
+
+<style lang="scss" scoped>
+    .page {
+        width: 100%;
+        height: auto;
+        background-color: rgb(233, 233, 233);
+    }
+</style>

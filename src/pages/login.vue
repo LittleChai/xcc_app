@@ -10,11 +10,14 @@
       <div class="square2"></div>
       <!-- 登录 -->
       <div class="login-wrap-bottom" v-show="type == 0 ? true : false">
-        <p>用户登录</p>
+        <p>
+          用户登录
+          <span class="p_hover"></span>
+        </p>
         <div class="login-wrap-input">
           <span class="login-wrap-icon">
             <!-- <img src="../../static/images/user.svg" alt /> -->
-            <Icon type="md-paw" color='#f8b3f1' size='20'/>
+            <Icon type="md-paw" color="rgba(45,183,245,1)" size="20" />
           </span>
           <span class="login-wrap-input1">
             <input
@@ -32,7 +35,7 @@
         <div class="login-wrap-input">
           <span class="login-wrap-icon">
             <!-- <img src="../../static/images/password.svg" alt /> -->
-            <Icon type="md-lock" color='#f8b3f1' size='20'/>
+            <Icon type="md-lock" color="rgba(45,183,245,1)" size="20" />
           </span>
           <span class="login-wrap-input1">
             <input
@@ -62,11 +65,14 @@
       <div class="square2"></div>
       <!-- 注册 -->
       <div class="login-wrap-bottom" v-show="type == 1 ? true : false">
-        <p>用户注册</p>
+        <p>
+          用户注册
+          <span class="p_hover"></span>
+        </p>
         <div class="login-wrap-input">
           <span class="login-wrap-icon">
             <!-- <img src="../../static/images/user.svg" alt /> -->
-            <Icon type="md-paw" color='#f8b3f1' size='20'/>
+            <Icon type="md-paw" color="rgba(45,183,245,1)" size="20" />
           </span>
           <span class="login-wrap-input1">
             <input
@@ -84,7 +90,7 @@
         <div class="login-wrap-input">
           <span class="login-wrap-icon">
             <!-- <img class="icon-email" src="../../static/images/email.svg" alt /> -->
-            <Icon type="ios-mail-open" color='#f8b3f1' size='20'/>
+            <Icon type="ios-mail-open" color="rgba(45,183,245,1)" size="20" />
           </span>
           <span class="login-wrap-input1">
             <input
@@ -102,7 +108,7 @@
         <div class="login-wrap-input">
           <span class="login-wrap-icon">
             <!-- <img src="../../static/images/password.svg" alt /> -->
-            <Icon type="md-lock" color='#f8b3f1' size='20'/>
+            <Icon type="md-lock" color="rgba(45,183,245,1)" size="20" />
           </span>
           <span class="login-wrap-input1">
             <input
@@ -120,7 +126,7 @@
         <div class="login-wrap-input">
           <span class="login-wrap-icon">
             <!-- <img src="../../static/images/password.svg" alt /> -->
-            <Icon type="md-lock" color='#f8b3f1' size='20'/>
+            <Icon type="md-lock" color="rgba(45,183,245,1)" size="20" />
           </span>
           <span class="login-wrap-input1">
             <input
@@ -150,11 +156,14 @@
       <div class="square2"></div>
       <!-- 忘记密码 -->
       <div class="login-wrap-bottom" v-show="type == 2 ? true : false">
-        <p>修改密码</p>
+        <p>
+          修改密码
+          <span class="p_hover"></span>
+        </p>
         <div class="login-wrap-input">
           <span class="login-wrap-icon">
             <!-- <img class="icon-email" src="../../static/images/email.svg" alt /> -->
-            <Icon type="md-paw" color='#f8b3f1' size='20'/>
+            <Icon type="md-paw" color="rgba(45,183,245,1)" size="20" />
           </span>
           <span class="login-wrap-input1">
             <input
@@ -172,7 +181,7 @@
         <div class="login-wrap-input">
           <span class="login-wrap-icon">
             <!-- <img src="../../static/images/password.svg" alt /> -->
-            <Icon type="md-lock" color='#f8b3f1' size='20'/>
+            <Icon type="md-lock" color="rgba(45,183,245,1)" size="20" />
           </span>
           <span class="login-wrap-input1">
             <input
@@ -190,7 +199,7 @@
         <div class="login-wrap-input">
           <span class="login-wrap-icon">
             <!-- <img src="../../static/images/password.svg" alt /> -->
-            <Icon type="md-lock" color='#f8b3f1' size='20'/>
+            <Icon type="md-lock" color="rgba(45,183,245,1)" size="20" />
           </span>
           <span class="login-wrap-input1">
             <input
@@ -283,9 +292,11 @@ export default {
         this.$Message.warning("请确认密码");
       } else {
         let reg = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
-        var reg1 = new RegExp("[\\u4E00-\\u9FFF]+","g");
+        var reg1 = new RegExp("[\\u4E00-\\u9FFF]+", "g");
         if (this.userName1.length < 6) {
           this.$Message.warning("用户名长度不能小于6位");
+        } else if (this.userName1.length > 20) {
+          this.$Message.warning("用户名长度不能大于20位");
         } else if (reg1.test(this.userName1)) {
           this.$Message.warning("用户名只能是字母或数字");
         } else if (!reg.test(this.email1)) {
@@ -301,10 +312,10 @@ export default {
 
           this.$http
             .post("/register", {
-              s: 'App.User.Register',
+              s: "App.User.Register",
               username: this.userName1,
               password: this.md5(this.password1),
-              ext_info: JSON.stringify({'email':this.email1})
+              ext_info: JSON.stringify({ email: this.email1 })
             })
             .then(res => {
               console.log(res);
@@ -314,7 +325,7 @@ export default {
                 this.userName1 = "";
                 this.email1 = "";
                 this.password1 = "";
-                this.password11 = "";  
+                this.password11 = "";
               } else {
                 this.$Message.warning(res.data.err_msg);
               }
@@ -334,30 +345,50 @@ export default {
       } else if (this.password == "") {
         this.$Message.warning("请输入密码");
       } else {
-        this.loading = true;
-        this.$http.post('/login',{
-          s: 'App.User.Login',
-          username: this.userName,
-          password: this.md5(this.password),
-        })
-        .then(res => {
-          console.log(res);
-          if(res.data.err_code == 0) {
-            this.$Message.success("登录成功");
-            let info = {
-              uuid: res.data.uuid,
-              token: res.data.token
-            }
-            localStorage.setItem('info',JSON.stringify(info))
-          }else {
-            this.$Message.warning(res.data.err_msg);
-          }
-          this.loading = false;
-        })
-        .catch(res => {
-          console.log(res);
-          this.loading = false;
-        })
+        var reg1 = new RegExp("[\\u4E00-\\u9FFF]+", "g");
+        if (reg1.test(this.userName)) {
+          this.$Message.warning("用户名只能是字母或数字");
+        }
+        else {
+          this.loading = true;
+          this.$http
+            .post("/login", {
+              s: "App.User.Login",
+              username: this.userName,
+              password: this.md5(this.password)
+            })
+            .then(res => {
+              console.log(res);
+              if (res.data.err_code == 0) {
+                this.$Message.success("登录成功");
+                this.$http.post('/getUserInfo',{
+                  s: "App.user.profile",
+                  uuid: res.data.uuid,
+                  token: res.data.token,
+                })
+                .then(res => {
+                  console.log(res);
+                  localStorage.setItem("info", JSON.stringify(res.data.info));
+                  this.$router.push({
+                    path: '/index'
+                  });
+                  this.userName = '';
+                  this.password = '';
+                })
+                .catch(res => {
+                  console.log(res);
+                })
+
+              } else {
+                this.$Message.warning(res.data.err_msg);
+              }
+              this.loading = false;
+            })
+            .catch(res => {
+              console.log(res);
+              this.loading = false;
+            });
+        }
       }
     },
 
@@ -370,31 +401,39 @@ export default {
       } else if (this.newPassword2 == "") {
         this.$Message.warning("请输入新密码");
       } else {
-        this.loading2 = true;
-        this.$http.post('/changePassword',{
-          s: 'App.User.AlterPassword',
-          username: this.userName2,
-          old_password: this.md5(this.oldPassword2),
-          new_password: this.md5(this.newPassword2)
-        })
-        .then(res => {
-          console.log(res);
-          if(res.data.err_code == 0) {
-            this.$Message.success("修改成功，请重新登录");
-            this.userName2 = '';
-            this.oldPassword2 = '';
-            this.newPassword2 = '';
-            this.type = 0;
-            localStorage.removeItem('info')
-          }else {
-            this.$Message.warning(res.data.err_msg);
-          }
-          this.loading2 = false;
-        })
-        .catch(res => {
-          console.log(res);
-          this.loading2 = false;
-        })
+
+        var reg1 = new RegExp("[\\u4E00-\\u9FFF]+", "g");
+        if (reg1.test(this.userName2)) {
+          this.$Message.warning("用户名只能是字母或数字");
+        }
+        else {
+          this.loading2 = true;
+          this.$http
+            .post("/changePassword", {
+              s: "App.User.AlterPassword",
+              username: this.userName2,
+              old_password: this.md5(this.oldPassword2),
+              new_password: this.md5(this.newPassword2)
+            })
+            .then(res => {
+              console.log(res);
+              if (res.data.err_code == 0) {
+                this.$Message.success("修改成功，请重新登录");
+                this.userName2 = "";
+                this.oldPassword2 = "";
+                this.newPassword2 = "";
+                this.type = 0;
+                localStorage.removeItem("info");
+              } else {
+                this.$Message.warning(res.data.err_msg);
+              }
+              this.loading2 = false;
+            })
+            .catch(res => {
+              console.log(res);
+              this.loading2 = false;
+            });
+        }
       }
     }
   },
@@ -409,11 +448,11 @@ export default {
 #login {
   width: 100%;
   height: 100%;
-  background: url(../../static/images/login1.jpg);
+  background: url(../../static/images/bg1.jpg);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-  position: relative;
+  // position: relative;
   /* background-attachment: fixed; */
 }
 
@@ -424,16 +463,16 @@ export default {
   left: -5%;
   width: 110%;
   height: 110%;
-  background: transparent url(../../static/images/login1.jpg) center center
+  background: transparent url(../../static/images/bg1.jpg) center center
     no-repeat;
-  filter: blur(8px);
+  filter: blur(0);
   z-index: 1;
   background-size: cover;
 }
 
 .login-wrap {
-  width: 320px;
-  height: 255px;
+  width: 360px;
+  height: 290px;
   background-color: rgba(255, 255, 255, 1);
   position: absolute;
   top: 35%;
@@ -441,19 +480,20 @@ export default {
   margin-left: -160px;
   margin-top: -75px;
   /* border-radius: 6px; */
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+  // box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
   transition: all 0.3s ease;
   z-index: 100;
 }
 
 .login-wrap-bg {
-  height: 350px;
+  height: 370px;
   top: 35%;
   transition: all 0.3s ease;
 }
 
 .login-wrap-md {
-  height: 300px;
+  height: 320px;
   top: 35%;
   transition: all 0.3s ease;
 }
@@ -468,17 +508,29 @@ export default {
 }
 
 .login-wrap-bottom p {
-  color: rgb(45, 183, 245);
+  color: rgba(26, 26, 26, 1);
   font-weight: bold;
-  position: relative;
-  top: -36px;
-  font-size: 16px;
+  position: absolute;
+  top: 14px;
+  font-size: 15px;
+
+  &::before {
+  }
+}
+
+.p_hover {
+  position: absolute;
+  left: -1px;
+  right: -1px;
+  height: 2px;
+  bottom: -4px;
+  background-color: rgb(45, 183, 245);
 }
 
 .login-wrap-bottom .login-btn {
   width: 85%;
-  position: relative;
-  top: 36px;
+  position: absolute;
+  bottom: 20px;
   height: 40px;
   cursor: pointer;
 }
@@ -488,11 +540,11 @@ export default {
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
-  border-bottom: 2px solid rgba(45,183,245,0.1);
-  margin: 6px 0 8px 0;
+  border-bottom: 1px solid rgba(45, 183, 245, 0.1);
+  margin: 6px 0 6px 0;
   padding: 2px 0 8px 0;
   position: relative;
-  top: -16px;
+  top: -22px;
 
   // &:hover {
   //   &::after {
@@ -535,7 +587,7 @@ export default {
 }
 
 .login-wrap-bottom .login-wrap-input1 {
-  width: 220px;
+  width: 270px;
   position: absolute;
   left: 28px;
   top: 5px;
@@ -549,8 +601,8 @@ export default {
   word-spacing: 1px;
   border: none;
   width: 100%;
-  color: rgb(45, 183, 245);
-  background-color: transparent!important;
+  color: black;
+  background-color: transparent !important;
   position: relative;
   font-weight: 400;
 }
@@ -558,19 +610,19 @@ export default {
 .login-wrap-bottom .input_hover {
   position: absolute;
   left: 0;
-  bottom: -2px;
-  height: 2px;
+  bottom: -1px;
+  height: 1px;
   width: 0%;
-  background-color: rgb(45,183,245);
+  background-color: rgb(45, 183, 245);
   transition: all 0.3s ease;
 }
 
 .forget-password {
   position: absolute;
   width: 55px;
-  right: 18px;
-  bottom: 90px;
-  color: #f8b3f1;
+  right: 20px;
+  bottom: 104px;
+  color: rgba(155, 155, 155, 1);
   font-weight: bold;
   font-size: 12px;
   cursor: pointer;
@@ -578,20 +630,20 @@ export default {
 }
 
 .login-wrap-bg .forget-password {
-  bottom: 92px;
+  bottom: 100px;
 }
 
 .login-wrap-md .forget-password {
-  bottom: 94px;
+  bottom: 96px;
 }
 
 .zhuce {
   right: unset;
-  left: 26px;
+  left: 28px;
 }
 
 .forget-password:hover {
-  color: rgb(87, 197, 247);
+  color: rgba(122, 122, 122, 1);
 }
 
 .login-all {

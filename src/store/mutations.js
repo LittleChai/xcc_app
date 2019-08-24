@@ -1,6 +1,6 @@
 const mutations = {
-    jiayi(state,n) {
-        return state.text1 += n;
+    addUserInfo(state,n) {
+        return state.userInfo = n;
     }
 }
 export default mutations;

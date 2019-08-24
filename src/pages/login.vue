@@ -361,6 +361,7 @@ export default {
               console.log(res);
               if (res.data.err_code == 0) {
                 this.$Message.success("登录成功");
+                localStorage.setItem("token", res.data.token);
                 this.$http.post('/getUserInfo',{
                   s: "App.user.profile",
                   uuid: res.data.uuid,

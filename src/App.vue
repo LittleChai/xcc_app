@@ -18,13 +18,29 @@ export default {
   beforeCreate() {},
   created() {},
   beforeMount() {},
-  mounted() {},
+  mounted() {
+    if(!localStorage.getItem('token')) {
+      this.$router.push({
+        path: '/login'
+      })
+    }
+  },
   beforeUpdate() {},
   updated() {},
   beforeDestroy() {},
   destroyed() {},
   watch: {
     $route(to, from) {
+      // console.log(to,from)
+      if(!localStorage.getItem('token')) {
+        if(to.name != 'login') {
+          this.$router.push({
+            path: '/login'
+          })
+        }
+      }
+
+
       if (to.meta.index > from.meta.index) {
         this.tName = "t_left";
       } else {

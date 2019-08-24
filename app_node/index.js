@@ -45,7 +45,7 @@ router.post('/login',async(ctx,next) => {
                 password: data.password,
             })
             .then(res => {
-                // console.log(res)
+                console.log(res)
                 resolve(res.data)
             })
             .catch(res => {
@@ -131,6 +131,31 @@ router.post('/getUserInfo',async(ctx,next) =>{
     await next();
     ctx.body = result.data;
 })
+
+//退出登录
+router.post('/logout',async(ctx,next) =>{
+    let val =  ctx.request.body;
+    const register = async(data) => {
+        return new Promise((resolve,reject)=> {
+            axios.post('/?s='+data.s+'&app_key='+appKey,{
+                uuid: data.uuid,
+                token: data.token
+            })
+            .then(res => {
+                console.log(res)
+                resolve(res.data)
+            })
+            .catch(res => {
+                resolve(res.data)
+            })
+        })
+    }
+
+    let result = await register(val);
+    await next();
+    ctx.body = result.data;
+})
+
 
 router.get('/exit',async(ctx) => {
     ctx.body = 'exit'

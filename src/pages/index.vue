@@ -3,8 +3,8 @@
     <!-- <v-scroll> -->
     <div class="index">
       <div class="left_side">
-        <xccTopside></xccTopside>
-        <xccBottomside></xccBottomside>
+        <xccTopside :userInfo='userInfo'></xccTopside>
+        <xccBottomside :userInfo='userInfo'></xccBottomside>
       </div>
 
       <div class="index_main">
@@ -22,15 +22,13 @@
           <Button class="index-btn" type="error">分类一</Button>
         </div>
         <div class="index_router">
-            <v-scroll>
-              
-                <transition :name='tName'>
-                  <!-- <scrollbars> -->
-                    <router-view></router-view>
-                  <!-- </scrollbars> -->
-                </transition>
-            </v-scroll>
-              
+          <v-scroll>
+            <transition :name="tName">
+              <!-- <scrollbars> -->
+              <router-view></router-view>
+              <!-- </scrollbars> -->
+            </transition>
+          </v-scroll>
         </div>
       </div>
 
@@ -38,7 +36,7 @@
         <xccRightside></xccRightside>
       </div>
 
-      <xccHeader></xccHeader>
+      <xccHeader :userInfo='userInfo'></xccHeader>
       <!-- <xccFooter class="footer"></xccFooter> -->
     </div>
     <!-- </v-scroll> -->
@@ -52,7 +50,7 @@ import xccBottomside from "../components/xcc_bottomside.vue";
 import xccRightside from "../components/xcc_rightside.vue";
 import xccFooter from "../components/xcc_footer.vue";
 
-import Scrollerbars from '@zhangzhengyi12/vue-scrollbars'
+import Scrollerbars from "@zhangzhengyi12/vue-scrollbars";
 
 export default {
   name: "index",
@@ -66,33 +64,47 @@ export default {
   },
   data() {
     return {
-        tName: ''
+      tName: "",
+      userInfo: {}
     };
   },
-  methods: {},
+  methods: {
+    getUserInfo() {
+      if (localStorage.getItem("info")) {
+        let info = JSON.parse(localStorage.getItem("info"));
+        this.userInfo = info;
+        this.$store.commit('addUserInfo',info)
+      } else {
+        this.userInfo.rolename = "未登录";
+        this.$store.commit('addUserInfo',this.userInfo)
+      }
+    }
+  },
   beforeCreate() {},
   created() {},
   beforeMount() {},
-  mounted() {},
+  mounted() {
+    this.getUserInfo();
+  },
   beforeUpdate() {},
   updated() {},
   beforeDestroy() {},
   destroyed() {},
   watch: {
-      $route(to,from) {
-          if (to.meta.index > from.meta.index) {
-                this.tName = "t_left";
-            } else {
-                this.tName = "t_right";
-            }
+    $route(to, from) {
+      if (to.meta.index > from.meta.index) {
+        this.tName = "t_left";
+      } else {
+        this.tName = "t_right";
       }
+    }
   }
 };
 </script>
 
 <style lang="scss" scoped>
 // 全局颜色定义
-$borderBottom : 1px solid rgb(233, 233, 233);
+$borderBottom: 1px solid rgb(233, 233, 233);
 
 .index_wrap {
   width: 100%;
@@ -113,7 +125,6 @@ $borderBottom : 1px solid rgb(233, 233, 233);
     transition: all 0.1s ease;
   }
 }
-
 
 // 中间部分
 .index_main {
@@ -141,7 +152,7 @@ $borderBottom : 1px solid rgb(233, 233, 233);
     width: 53px;
     top: 60px;
     height: 500px;
-    // background-color: white;  
+    // background-color: white;
     box-sizing: border-box;
     // border-bottom: $borderBottom;
 
@@ -156,19 +167,18 @@ $borderBottom : 1px solid rgb(233, 233, 233);
   }
 
   .index_router {
-      position: absolute;
-      bottom: 10px;
-      left: 60px;
-      right: 0;
-      top: 60px;
-      background-color: rgba(255, 255, 255, 0.1);
-      overflow: hidden;
-      box-sizing: border-box;
-      // padding: 0 0 20px 20px;
-      // border-radius: 8px;
+    position: absolute;
+    bottom: 10px;
+    left: 60px;
+    right: 0;
+    top: 60px;
+    background-color: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    box-sizing: border-box;
+    // padding: 0 0 20px 20px;
+    // border-radius: 8px;
   }
 }
-
 
 // 左侧导航
 .left_side {
@@ -181,7 +191,6 @@ $borderBottom : 1px solid rgb(233, 233, 233);
   background-color: rgb(58, 63, 81);
 }
 
-
 // 右侧导航
 .right_side {
   width: 230px;
@@ -191,7 +200,6 @@ $borderBottom : 1px solid rgb(233, 233, 233);
   right: 0;
   background-color: rgba(255, 255, 255, 0.2);
 }
-
 
 // 底部显示
 .footer {

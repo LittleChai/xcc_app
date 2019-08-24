@@ -1,10 +1,10 @@
-<template id='xcc_bottomside'>
-    <div class="bottom_side"></div>
+<template id='xcc_rightside'>
+    <div class="right_side_component"></div>
 </template>
 
 <script>
 export default {
-    name: 'xcc_bottomside',
+    name: 'xcc_rightside',
     data() {
         return {
 
@@ -42,14 +42,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .bottom_side {
-        width: 220px;
-        height: auto;
+    .right_side_component {
+        width: 100%;
+        height: 100%;
         // background-color: white;
         position: absolute;
-        top: 250px;
-        bottom: 10px;
-        left: 0;
-        // min-height: 400px;
     }
 </style>

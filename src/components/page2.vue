@@ -100,6 +100,7 @@ export default {
     .page {
         width: 100%;
         height: auto;
-        background-color: rgb(233, 233, 233);
+        padding: 20px;
+        // background-color: rgb(233, 233, 233);
     }
 </style>

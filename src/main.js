@@ -8,25 +8,29 @@ import echarts from 'echarts'
 import vuescroll from 'vuescroll';
 import iview from 'iview'
 import 'iview/dist/styles/iview.css'
+import Scrollerbars from '@zhangzhengyi12/vue-scrollbars'
+
 
 Vue.config.productionTip = false
 
 Vue.use(iview);
+Vue.use(Scrollerbars);
 
 Vue.use(vuescroll, {
   ops: {
     vuescroll: {
       mode: 'native',
-      sizeStrategy: 'number',
+      sizeStrategy: 'percent',
       detectResize: true
     },
     scrollPanel: {
-      scrollingX: true,
+      scrollingX: false,
       scrollingY: true,
-      speed: 300
+      speed: 300,
+      easing: 'easeInQuint'
     },
     rail: {
-      background: '#01a99a',
+      background: 'rgba(255,255,255,0)',
       opacity: 0,
       size: '6px',
       specifyBorderRadius: false,
@@ -38,7 +42,7 @@ Vue.use(vuescroll, {
       showDelay: 1000,
       onlyShowBarOnScroll: false,
       keepShow: true,
-      background: 'rgb(204,203,203)',
+      background: 'rgb(255,255,255)',
       opacity: 1,
       hoverStyle: false,
       specifyBorderRadius: false,
@@ -49,6 +53,10 @@ Vue.use(vuescroll, {
   }, // 在这里设置全局默认配置
   name: 'v-scroll' // 在这里自定义组件名字，默认是vueScroll
 });  
+
+
+
+
 
 Vue.prototype.$http = axios;
 Vue.prototype.md5 = md5;

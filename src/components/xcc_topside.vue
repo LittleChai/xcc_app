@@ -45,7 +45,6 @@ export default {
     .top_side {
         width: 220px;
         height: 250px;
-        margin: 10px auto 0 auto;
-        background-color: white;
+        // background-color: white;
     }
 </style>

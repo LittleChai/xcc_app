@@ -23,11 +23,19 @@
         </div>
         <div class="index_router">
             <v-scroll>
+              
                 <transition :name='tName'>
+                  <!-- <scrollbars> -->
                     <router-view></router-view>
+                  <!-- </scrollbars> -->
                 </transition>
             </v-scroll>
+              
         </div>
+      </div>
+
+      <div class="right_side">
+        <xccRightside></xccRightside>
       </div>
 
       <xccHeader></xccHeader>
@@ -41,7 +49,10 @@
 import xccHeader from "../components/xcc_header.vue";
 import xccTopside from "../components/xcc_topside.vue";
 import xccBottomside from "../components/xcc_bottomside.vue";
+import xccRightside from "../components/xcc_rightside.vue";
 import xccFooter from "../components/xcc_footer.vue";
+
+import Scrollerbars from '@zhangzhengyi12/vue-scrollbars'
 
 export default {
   name: "index",
@@ -49,7 +60,9 @@ export default {
     xccHeader,
     xccTopside,
     xccBottomside,
-    xccFooter
+    xccRightside,
+    xccFooter,
+    Scrollerbars
   },
   data() {
     return {
@@ -90,7 +103,8 @@ $borderBottom : 1px solid rgb(233, 233, 233);
   background-size: cover;
 
   .index {
-    width: 1300px;
+    width: 100%;
+    min-width: 1300px;
     height: auto;
     min-height: 100%;
     margin: 0 auto;
@@ -100,58 +114,86 @@ $borderBottom : 1px solid rgb(233, 233, 233);
   }
 }
 
+
+// 中间部分
 .index_main {
   position: absolute;
-  left: 240px;
-  top: 70px;
-  bottom: 10px;
-  right: 60px;
+  left: 235px;
+  top: 65px;
+  bottom: 0;
+  right: 246px;
 
   .index_bread {
     width: 100%;
-    height: 30px;
-    line-height: 30px;
-    background-color: white;
+    height: 50px;
+    line-height: 50px;
+    background-color: rgba(255, 255, 255, 0.2);
     box-sizing: border-box;
     padding: 0 10px;
-    border-bottom: $borderBottom;
+    // border-bottom: $borderBottom;
+    border-radius: 8px;
   }
 
   .index_btns {
-    width: 100%;
-    height: 50px;
-    line-height: 46px;
-    background-color: white;
+    position: absolute;
+    // bottom: 0;
+    left: 0;
+    width: 53px;
+    top: 60px;
+    height: 500px;
+    // background-color: white;  
     box-sizing: border-box;
-    padding: 0 10px;
-    border-bottom: $borderBottom;
+    // border-bottom: $borderBottom;
 
     .index-btn {
       margin-right: 10px;
+      font-size: 12px;
+      padding: 6px 6px;
+      margin: 0 auto 10px auto;
+      text-align: center;
+      border-radius: 5px;
     }
   }
 
   .index_router {
-      width: 100%;
       position: absolute;
-      bottom: 0;
-      left: 0;
+      bottom: 10px;
+      left: 60px;
       right: 0;
-      top: 80px;
-      background-color: white;
+      top: 60px;
+      background-color: rgba(255, 255, 255, 0.1);
       overflow: hidden;
+      box-sizing: border-box;
+      // padding: 0 0 20px 20px;
+      // border-radius: 8px;
   }
 }
 
+
+// 左侧导航
 .left_side {
-  width: 240px;
+  width: 220px;
   height: 100%;
   position: absolute;
-  top: 0;
-  bottom: 30px;
+  top: 55px;
+  bottom: 10px;
   left: 0;
+  background-color: rgb(58, 63, 81);
 }
 
+
+// 右侧导航
+.right_side {
+  width: 230px;
+  position: absolute;
+  top: 55px;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+
+// 底部显示
 .footer {
   // height: 20px;
   // width: 100%;

@@ -15,12 +15,14 @@
             <BreadcrumbItem>主页分类3</BreadcrumbItem>
           </Breadcrumb>
         </div>
-        <div class="index_btns">
-          <Button class="index-btn" type="info">分类一</Button>
-          <Button class="index-btn" type="success">分类一</Button>
-          <Button class="index-btn" type="warning">分类一</Button>
-          <Button class="index-btn" type="error">分类一</Button>
-        </div>
+          <div class="index_btns">
+            <Icon size='24' type="ios-arrow-back" class="index_btns_back"/>
+            <Icon size='24' type="ios-arrow-forward" class="index_btns_prev"/>
+            <div class='index_btns_wrap'>
+              <Button class="index-btn" icon="md-create" type="default">发帖</Button>
+              <Button class="index-btn" icon="ios-restaurant" type="primary">菜谱</Button>
+            </div>
+          </div>
         <div class="index_router">
           <v-scroll>
             <transition :name="tName">
@@ -144,18 +146,48 @@ $borderBottom: 1px solid rgb(233, 233, 233);
     position: absolute;
     // bottom: 0;
     left: 0;
-    width: 53px;
-    top: 60px;
-    height: 500px;
+    // width: ;
+    top: 55px;
+    right: 0;
+    height: 50px;
     // background-color: white;
     box-sizing: border-box;
-    // border-bottom: $borderBottom;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    background-color: rgba(255, 255, 255, 0.1);
 
+    .index_btns_back {
+      position: absolute;
+      left: 5px;
+      top: 12px;
+      color: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+    }
+
+    .index_btns_prev {
+      position: absolute;
+      right: 5px;
+      top: 12px;
+      color: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+    }
+
+    .current {
+      color: rgba(255, 255, 255, 1);
+    }
+
+    .index_btns_wrap {
+      // width: 100%;
+      position: absolute;
+      left:35px;
+      right: 35px;
+      height: 100%;
+
+    }
     .index-btn {
       margin-right: 10px;
-      font-size: 12px;
-      padding: 6px 6px;
-      margin: 0 auto 10px auto;
+      font-size: 14px;
+      padding: 5px 8px;
+      margin: 8px 0px 0 10px;
       text-align: center;
       border-radius: 5px;
     }
@@ -164,9 +196,9 @@ $borderBottom: 1px solid rgb(233, 233, 233);
   .index_router {
     position: absolute;
     bottom: 10px;
-    left: 60px;
+    left: 0px;
     right: 0;
-    top: 60px;
+    top: 105px;
     background-color: rgba(255, 255, 255, 0.1);
     overflow: hidden;
     box-sizing: border-box;

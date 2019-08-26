@@ -81,8 +81,8 @@
               @keyup.enter="register"
               v-model="userName1"
               maxlength="20"
-              @blur="blurBorder(0)"
-              @focus="focusBorder(0)"
+              @blur="blurBorder(2)"
+              @focus="focusBorder(2)"
             />
           </span>
           <span class="input_hover"></span>
@@ -99,8 +99,8 @@
               @keyup.enter="register"
               v-model="email1"
               maxlength="20"
-              @blur="blurBorder(1)"
-              @focus="focusBorder(1)"
+              @blur="blurBorder(3)"
+              @focus="focusBorder(3)"
             />
           </span>
           <span class="input_hover"></span>
@@ -117,8 +117,8 @@
               @keyup.enter="register"
               v-model="password1"
               maxlength="20"
-              @blur="blurBorder(2)"
-              @focus="focusBorder(2)"
+              @blur="blurBorder(4)"
+              @focus="focusBorder(4)"
             />
           </span>
           <span class="input_hover"></span>
@@ -135,8 +135,8 @@
               @keyup.enter="register"
               v-model="password11"
               maxlength="20"
-              @blur="blurBorder(3)"
-              @focus="focusBorder(3)"
+              @blur="blurBorder(5)"
+              @focus="focusBorder(5)"
             />
           </span>
           <span class="input_hover"></span>
@@ -172,8 +172,8 @@
               @keyup.enter="find"
               v-model="userName2"
               maxlength="20"
-              @blur="blurBorder(0)"
-              @focus="focusBorder(0)"
+              @blur="blurBorder(6)"
+              @focus="focusBorder(6)"
             />
           </span>
           <span class="input_hover"></span>
@@ -190,8 +190,8 @@
               @keyup.enter="find"
               v-model="oldPassword2"
               maxlength="20"
-              @blur="blurBorder(1)"
-              @focus="focusBorder(1)"
+              @blur="blurBorder(7)"
+              @focus="focusBorder(7)"
             />
           </span>
           <span class="input_hover"></span>
@@ -208,8 +208,8 @@
               @keyup.enter="find"
               v-model="newPassword2"
               maxlength="20"
-              @blur="blurBorder(1)"
-              @focus="focusBorder(1)"
+              @blur="blurBorder(8)"
+              @focus="focusBorder(8)"
             />
           </span>
           <span class="input_hover"></span>

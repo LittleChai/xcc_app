@@ -3,8 +3,8 @@
     <!-- <v-scroll> -->
     <div class="index">
       <div class="left_side">
-        <xccTopside :userInfo='userInfo'></xccTopside>
-        <xccBottomside :userInfo='userInfo'></xccBottomside>
+        <xccSide :userInfo='userInfo'></xccSide>
+        <!-- <xccBottomside :userInfo='userInfo'></xccBottomside> -->
       </div>
 
       <div class="index_main">
@@ -24,9 +24,7 @@
         <div class="index_router">
           <v-scroll>
             <transition :name="tName">
-              <!-- <scrollbars> -->
               <router-view></router-view>
-              <!-- </scrollbars> -->
             </transition>
           </v-scroll>
         </div>
@@ -45,22 +43,19 @@
 
 <script>
 import xccHeader from "../components/xcc_header.vue";
-import xccTopside from "../components/xcc_topside.vue";
+import xccSide from "../components/xcc_side.vue";
 import xccBottomside from "../components/xcc_bottomside.vue";
 import xccRightside from "../components/xcc_rightside.vue";
 import xccFooter from "../components/xcc_footer.vue";
-
-import Scrollerbars from "@zhangzhengyi12/vue-scrollbars";
 
 export default {
   name: "index",
   components: {
     xccHeader,
-    xccTopside,
+    xccSide,
     xccBottomside,
     xccRightside,
-    xccFooter,
-    Scrollerbars
+    xccFooter
   },
   data() {
     return {

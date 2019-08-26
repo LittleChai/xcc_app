@@ -8,13 +8,11 @@ import echarts from 'echarts'
 import vuescroll from 'vuescroll';
 import iview from 'iview'
 import 'iview/dist/styles/iview.css'
-import Scrollerbars from '@zhangzhengyi12/vue-scrollbars'
 
 
 Vue.config.productionTip = false
 
 Vue.use(iview);
-Vue.use(Scrollerbars);
 
 Vue.use(vuescroll, {
   ops: {

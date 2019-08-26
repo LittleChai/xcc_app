@@ -1,6 +1,11 @@
 <template id='xcc_header'>
   <div class="header">
-    <div class="left_header"></div>
+    <div class="left_header">
+      <div class="left_header_logo">
+        <img src="../../static/images/logo.png" alt="">
+      </div>
+      <div class="left_header_text">柴の乐园</div>
+    </div>
     <div class="right_header">
       <div class="right_header_li"></div>
 
@@ -110,8 +115,35 @@ export default {
   justify-content: space-between;
 
   .left_header {
-    width: 250px;
+    width: 300px;
     height: 100%;
+    line-height: 55px;
+    position: relative;
+
+    .left_header_logo {
+      width: 40px;
+      height: 40px;
+      display: inline-block;
+      position: relative;
+      top: 10px;
+      margin-left: 10px;
+
+      img {
+        width: 35px;
+        height: 35px;
+      }
+    }
+
+    .left_header_text {
+      width: auto;
+      height: 100%;
+      position: absolute;
+      left: 55px;
+      top: 1px;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+    }
   }
 
   .right_header {

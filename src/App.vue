@@ -24,6 +24,11 @@ export default {
         path: '/login'
       })
     }
+    else {
+        this.$router.push({
+          path: '/index'
+        })
+      }
   },
   beforeUpdate() {},
   updated() {},
@@ -63,5 +68,13 @@ export default {
   -ms-transform: translateZ(0);
   -o-transform: translateZ(0);
   transform: translateZ(0);
+}
+
+.ivu-poptip-confirm .ivu-poptip-body-message {
+  color: black!important;
+}
+
+.ivu-poptip-confirm .ivu-poptip-body .ivu-icon {
+  top: 25px;
 }
 </style>

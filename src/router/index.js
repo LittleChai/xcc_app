@@ -5,6 +5,11 @@ import index from '../pages/index.vue'
 import page1 from '../components/page1.vue'
 import page2 from '../components/page2.vue'
 
+const originalPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
 Vue.use(Router)
 
 export default new Router({

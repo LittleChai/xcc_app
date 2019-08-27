@@ -1,10 +1,8 @@
 <template id='index'>
   <div class="index_wrap">
-    <!-- <v-scroll> -->
     <div class="index">
-      <div class="left_side">
+      <!-- <div class="left_side">
         <xccSide :userInfo='userInfo'></xccSide>
-        <!-- <xccBottomside :userInfo='userInfo'></xccBottomside> -->
       </div>
 
       <div class="index_main">
@@ -34,12 +32,9 @@
 
       <div class="right_side">
         <xccRightside></xccRightside>
-      </div>
-
+      </div> -->
       <xccHeader :userInfo='userInfo'></xccHeader>
-      <!-- <xccFooter class="footer"></xccFooter> -->
     </div>
-    <!-- </v-scroll> -->
   </div>
 </template>
 
@@ -49,6 +44,7 @@ import xccSide from "../components/xcc_side.vue";
 import xccBottomside from "../components/xcc_bottomside.vue";
 import xccRightside from "../components/xcc_rightside.vue";
 import xccFooter from "../components/xcc_footer.vue";
+import { setTimeout } from 'timers';
 
 export default {
   name: "index",
@@ -61,7 +57,7 @@ export default {
   },
   data() {
     return {
-      tName: "",
+      tName: "t_left",
       userInfo: {}
     };
   },
@@ -81,7 +77,13 @@ export default {
   created() {},
   beforeMount() {},
   mounted() {
-    this.getUserInfo();
+    let that = this;
+    var delayTime = null;
+    delayTime = setTimeout(function() {
+      that.getUserInfo();
+      clearTimeout(delayTime)
+    },1500);
+    
   },
   beforeUpdate() {},
   updated() {},

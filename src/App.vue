@@ -56,11 +56,6 @@ export default {
 };
 </script>
 
-<style>
-@import "../static/styles/reset.css";
-@import "../static/styles/app.css";
-</style>
-
 <style lang="scss">
 .tNames {
   -webkit-transform: translateZ(0);
@@ -76,5 +71,10 @@ export default {
 
 .ivu-poptip-confirm .ivu-poptip-body .ivu-icon {
   top: 25px;
+}
+
+.ivu-btn>.ivu-icon+span, .ivu-btn>span+.ivu-icon {
+  position: relative!important;
+  top: -1px!important;
 }
 </style>

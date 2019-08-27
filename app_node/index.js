@@ -164,5 +164,5 @@ router.get('/exit',async(ctx) => {
 app.use(router.routes());
 app.use(router.allowedMethods());
 
-app.listen(3000);
-console.log('server is running')
+app.listen(6666);
+// console.log('server is running')

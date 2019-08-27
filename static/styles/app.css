@@ -35,20 +35,20 @@
 
 .t_right-enter {
   opacity: 0;
-  transform: translate3d(-50%, 0, 0);
+  transform: translate3d(-10%, 0, 0);
 }
 
 .t_right-leave-active {
   opacity: 0;
-  transform: translate3d(50%, 0, 0);
+  transform: translate3d(10%, 0, 0);
 }
 
 .t_left-enter {
   opacity: 0;
-  transform: translate3d(50%, 0, 0);
+  transform: translate3d(10%, 0, 0);
 }
 
 .t_left-leave-active {
   opacity: 0;
-  transform: translate3d(-50%, 0, 0);
+  transform: translate3d(-10%, 0, 0);
 }

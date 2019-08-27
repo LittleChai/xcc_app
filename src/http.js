@@ -8,7 +8,8 @@ export default{
       axios({
         method: "GET",
         // url: '/api'+ `${url}?s=${param.s}&username=${param.username}&password=${param.password}&app_key=${param.app_key}`,
-        url: '/api' + url,
+        // url: '/api' + url,
+        url: 'http://apps.wuyayu.com' + url,
         data: param
       }).then(res => {
         var res_code = res.status.toString();
@@ -34,7 +35,8 @@ export default{
       url = url || '' 
       axios({
         method: "POST",
-        url: '/api'+url,
+        // url: '/api' + url,
+        url: 'http://apps.wuyayu.com' + url,
         data: param
       }).then(res => {
         var res_code = res.status.toString();

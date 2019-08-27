@@ -106,7 +106,7 @@ $borderBottom: 1px solid rgb(233, 233, 233);
 .index_wrap {
   width: 100%;
   height: 100%;
-  background: url(../../static/images/bg4.jpg);
+  background: url(http://data.wuyayu.com/bg4.png);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;

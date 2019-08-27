@@ -9,6 +9,9 @@ import vuescroll from 'vuescroll';
 import iview from 'iview'
 import 'iview/dist/styles/iview.css'
 
+import "../static/styles/reset.css";
+import "../static/styles/app.css";
+
 
 Vue.config.productionTip = false
 
@@ -51,8 +54,6 @@ Vue.use(vuescroll, {
   }, // 在这里设置全局默认配置
   name: 'v-scroll' // 在这里自定义组件名字，默认是vueScroll
 });  
-
-
 
 
 

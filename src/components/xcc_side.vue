@@ -15,19 +15,19 @@
 
 
       <div v-if="!bol" class="side_avatar">
-        <img src="../../static/images/default.jpg" alt />
+        <img src="http://data.wuyayu.com/default.jpg" alt />
       </div>
 
       <div v-if="bol" class="side_avatar">
         <img
-          :src="FuserInfo.ext_info.yesapi_avatar == '' ? require('../../static/images/default.jpg') :  FuserInfo.ext_info.yesapi_avatar"
+          :src="FuserInfo.ext_info.yesapi_avatar == '' ? 'http://data.wuyayu.com/default.jpg' :  FuserInfo.ext_info.yesapi_avatar"
           alt
         />
       </div>
 
       <div class="side_name">
         <img src="../../static/images/admin.png" alt />
-        {{FuserInfo.rolename}}
+        {{FuserInfo.username}}
       </div>
 
       <div class="side_text">
@@ -202,6 +202,7 @@ $whiteColor: #eaebed;
       padding: 0px 15px;
       text-align: center;
       color: $whiteColor;
+      font-size: 12px;
       @include dian;
     }
 

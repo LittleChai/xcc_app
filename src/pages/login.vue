@@ -1,6 +1,6 @@
 <template>
   <div id="login">
-    <button @click="changeRouter">切换路由</button>
+    <!-- <button @click="changeRouter">切换路由</button> -->
 
     <div
       :class="type == 1 ? 'login-wrap login-wrap-bg' : 'login-wrap' "
@@ -21,6 +21,7 @@
           </span>
           <span class="login-wrap-input1">
             <input
+              autocomplete="off"
               type="text"
               placeholder="请输入账号"
               @keyup.enter="login"
@@ -38,7 +39,8 @@
             <Icon type="md-lock" color="rgba(45,183,245,1)" size="20" />
           </span>
           <span class="login-wrap-input1">
-            <input
+            <input  
+              autocomplete="off"
               type="password"
               placeholder="请输入密码"
               @keyup.enter="login"
@@ -75,9 +77,10 @@
             <Icon type="md-paw" color="rgba(45,183,245,1)" size="20" />
           </span>
           <span class="login-wrap-input1">
-            <input
+            <input  
+              autocomplete="off"
               type="text"
-              placeholder="请输入账号(字母或者数字组合)"
+              placeholder="请输入账号(这将会是您的昵称)"
               @keyup.enter="register"
               v-model="userName1"
               maxlength="20"
@@ -94,6 +97,7 @@
           </span>
           <span class="login-wrap-input1">
             <input
+              autocomplete="off"
               type="text"
               placeholder="请输入邮箱"
               @keyup.enter="register"
@@ -112,6 +116,7 @@
           </span>
           <span class="login-wrap-input1">
             <input
+              autocomplete="off"
               type="password"
               placeholder="请输入密码(6位或6位以上)"
               @keyup.enter="register"
@@ -130,6 +135,7 @@
           </span>
           <span class="login-wrap-input1">
             <input
+              autocomplete="off"
               type="password"
               placeholder="请确认密码"
               @keyup.enter="register"
@@ -167,6 +173,7 @@
           </span>
           <span class="login-wrap-input1">
             <input
+              autocomplete="off"
               type="text"
               placeholder="请输入用户名"
               @keyup.enter="find"
@@ -185,6 +192,7 @@
           </span>
           <span class="login-wrap-input1">
             <input
+              autocomplete="off"
               type="password"
               placeholder="请输入当前密码"
               @keyup.enter="find"
@@ -203,6 +211,7 @@
           </span>
           <span class="login-wrap-input1">
             <input
+              autocomplete="off"
               type="password"
               placeholder="请输入新密码"
               @keyup.enter="find"
@@ -293,12 +302,10 @@ export default {
       } else {
         let reg = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
         var reg1 = new RegExp("[\\u4E00-\\u9FFF]+", "g");
-        if (this.userName1.length < 6) {
-          this.$Message.warning("用户名长度不能小于6位");
-        } else if (this.userName1.length > 20) {
-          this.$Message.warning("用户名长度不能大于20位");
-        } else if (reg1.test(this.userName1)) {
-          this.$Message.warning("用户名只能是字母或数字");
+        if (this.userName1.length < 3) {
+          this.$Message.warning("用户名长度不能小于3位");
+        } else if (this.userName1.length > 11) {
+          this.$Message.warning("用户名长度不能大于11位");
         } else if (!reg.test(this.email1)) {
           this.$Message.warning("请输入正确的邮箱");
         } else if (this.password1.length < 6) {
@@ -309,7 +316,7 @@ export default {
           // this.$Message.loading('正在注册');
 
           this.loading1 = true;
-
+          // console.log(this.userName1.length)
           this.$http
             .post("/register", {
               s: "App.User.Register",
@@ -326,6 +333,7 @@ export default {
                 this.email1 = "";
                 this.password1 = "";
                 this.password11 = "";
+                this.type = 0;
               } else {
                 this.$Message.warning(res.data.err_msg);
               }
@@ -345,9 +353,11 @@ export default {
       } else if (this.password == "") {
         this.$Message.warning("请输入密码");
       } else {
-        var reg1 = new RegExp("[\\u4E00-\\u9FFF]+", "g");
-        if (reg1.test(this.userName)) {
-          this.$Message.warning("用户名只能是字母或数字");
+        if(this.userName.length < 3) {
+          this.$Message.warning("用户名长度不能小于3位");
+        }
+        else if(this.userName.length > 11) {
+          this.$Message.warning("用户名长度不能大于11位");
         }
         else {
           this.loading = true;
@@ -390,6 +400,7 @@ export default {
               this.loading = false;
             });
         }
+        
       }
     },
 
@@ -402,10 +413,12 @@ export default {
       } else if (this.newPassword2 == "") {
         this.$Message.warning("请输入新密码");
       } else {
-
-        var reg1 = new RegExp("[\\u4E00-\\u9FFF]+", "g");
-        if (reg1.test(this.userName2)) {
-          this.$Message.warning("用户名只能是字母或数字");
+        
+        if(this.userName2.length < 3) {
+          this.$Message.warning("用户名长度不能小于3位");
+        }
+        else if(this.userName2.length > 11) {
+          this.$Message.warning("用户名长度不能大于11位");
         }
         else {
           this.loading2 = true;
@@ -449,7 +462,7 @@ export default {
 #login {
   width: 100%;
   height: 100%;
-  background: url(../../static/images/bg1.jpg);
+  background: url(http://data.wuyayu.com/bg1.png);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -464,7 +477,7 @@ export default {
   left: -5%;
   width: 110%;
   height: 110%;
-  background: transparent url(../../static/images/bg1.jpg) center center
+  background: transparent url(../../static/images/bg1.png) center center
     no-repeat;
   filter: blur(0);
   z-index: 1;

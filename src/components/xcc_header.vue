@@ -2,7 +2,7 @@
   <div class="header">
     <div class="left_header">
       <div class="left_header_logo">
-        <img src="../../static/images/logo.png" alt="">
+        <img src="../../static/images/logo.svg" alt="">
       </div>
       <div class="left_header_text">柴の乐园</div>
     </div>
@@ -15,7 +15,7 @@
     </div>
 
     <div class="right_header_logout">
-      <span>{{userInfo.rolename}}</span>
+      <span>{{userInfo.username}}</span>
       <Poptip confirm title="是否退出登录?" @on-ok="logout">
         <Icon type="md-exit" class="right_header_icon" size="18" />
       </Poptip>
@@ -33,7 +33,7 @@ export default {
     //   userInfo: {}
     };
   },
-    props: ['userInfo'],
+  props: ['userInfo'],
   methods: {
     logoutFn() {
       localStorage.removeItem("token");
@@ -151,7 +151,7 @@ export default {
     height: 100%;
     flex-flow: row nowrap;
     position: relative;
-    right: 125px;
+    right: 185px;
     // justify-content: space-between;
 
     .right_header_li {
@@ -162,19 +162,19 @@ export default {
   }
 
   .right_header_logout {
-    width: 120px;
+    width: 170px;
     height: 100%;
     line-height: 55px;
     color: white;
     display: inline-block;
     position: absolute;
-    right: 0;
+    right: 10px;
     top: 0;
 
     span {
       font-size: 16px;
       display: inline-block;
-      width: 72px;
+      width: 130px;
       height: 100%;
       text-align: right;
       overflow: hidden;

@@ -237,6 +237,7 @@
 
 <script>
 import Vue from "vue";
+import { setTimeout, clearTimeout } from 'timers';
 
 export default {
   name: "login",
@@ -348,6 +349,7 @@ export default {
 
     // 登录
     login() {
+      let that = this;
       if (this.userName == "") {
         this.$Message.warning("请输入帐号");
       } else if (this.password == "") {
@@ -380,11 +382,16 @@ export default {
                 .then(res => {
                   console.log(res);
                   localStorage.setItem("info", JSON.stringify(res.data.info));
-                  this.$router.push({
-                    path: '/index'
-                  });
-                  this.userName = '';
-                  this.password = '';
+                  var pathTimer = null;
+                  pathTimer = setTimeout(function() {
+                    clearTimeout(pathTimer);
+                    that.$router.push({
+                      path: '/index/article'
+                    });
+                    that.userName = '';
+                    that.password = '';
+                  },1000)
+
                 })
                 .catch(res => {
                   console.log(res);

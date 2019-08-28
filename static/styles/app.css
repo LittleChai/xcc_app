@@ -22,13 +22,14 @@
 .t_right-leave-active,
 .t_left-enter-active,
 .t_left-leave-active {
-  -webkit-transform: translateX(0);
-  -moz-transform: translateX(0);
-  -ms-transform: translateX(0);
-  -o-transform: translateX(0);
-  transform: translateX(0);
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
   will-change: transform;
   transition: all 0.5s ease;
+  /* transition-delay: 1s; */
   position: absolute;
   left: 0;
 }

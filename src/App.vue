@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <transition :name="tName" class="tNames">
+    <transition :name="tName" class="tNames" mode="out-in" :duration="{ enter: 700, leave: 500 }">
       <router-view ></router-view>
     </transition>
   </div>
@@ -26,7 +26,7 @@ export default {
     }
     else {
         this.$router.push({
-          path: '/index'
+          path: '/index/article'
         })
       }
   },
@@ -63,6 +63,7 @@ export default {
   -ms-transform: translateZ(0);
   -o-transform: translateZ(0);
   transform: translateZ(0);
+  will-change: transform;
 }
 
 .ivu-poptip-confirm .ivu-poptip-body-message {

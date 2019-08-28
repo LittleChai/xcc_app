@@ -1,15 +1,15 @@
 <template id='index'>
   <div class="index_wrap">
     <div class="index">
-      <!-- <div class="left_side">
+      <div class="left_side">
         <xccSide :userInfo='userInfo'></xccSide>
       </div>
 
       <div class="index_main">
         <div class="index_bread">
           <Breadcrumb>
-            <BreadcrumbItem to="/index/page1">主页分类1</BreadcrumbItem>
-            <BreadcrumbItem to="/index/page2">主页分类2</BreadcrumbItem>
+            <BreadcrumbItem to="/index/article">主页</BreadcrumbItem>
+            <BreadcrumbItem to="/index/editArticle">文章编辑</BreadcrumbItem>
             <BreadcrumbItem>主页分类3</BreadcrumbItem>
           </Breadcrumb>
         </div>
@@ -32,7 +32,7 @@
 
       <div class="right_side">
         <xccRightside></xccRightside>
-      </div> -->
+      </div>
       <xccHeader :userInfo='userInfo'></xccHeader>
     </div>
   </div>
@@ -109,6 +109,7 @@ $borderBottom: 1px solid rgb(233, 233, 233);
   width: 100%;
   height: 100%;
   background: url(http://data.wuyayu.com/bg4.png);
+  // background-color: lightblue;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -201,7 +202,7 @@ $borderBottom: 1px solid rgb(233, 233, 233);
     left: 0px;
     right: 0;
     top: 105px;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0);
     overflow: hidden;
     box-sizing: border-box;
     // padding: 0 0 20px 20px;

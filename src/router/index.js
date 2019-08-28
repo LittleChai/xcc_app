@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import login from '../pages/login.vue'
 import index from '../pages/index.vue'
-import page1 from '../components/page1.vue'
 import page2 from '../components/page2.vue'
 
 const originalPush = Router.prototype.push
@@ -21,7 +20,7 @@ export default new Router({
     {
       path: '/login',
       name: 'login',
-      component: login,
+      component: resolve=>(require(["../pages/login"],resolve)),
       meta: {
         index: 0
       }
@@ -29,15 +28,15 @@ export default new Router({
     {
       path: '/index',
       name: 'index',
-      component: index,
+      component: resolve=>(require(["../pages/index"],resolve)),
       meta: {
         index: 1
       },
       children: [
         {
-          path: '/index/page1',
-          name: 'page1',
-          component: page1,
+          path: '/index/article',
+          name: 'article',
+          component: resolve=>(require(["../components/xcc_article"],resolve)),
           meta: {
             index: 11
           },
@@ -45,7 +44,7 @@ export default new Router({
         {
           path: '/index/page2',
           name: 'page2',
-          component: page2,
+          component: resolve=>(require(["../components/page2"],resolve)),
           meta: {
             index: 12
           },

@@ -18,7 +18,7 @@
             <Icon size='24' type="ios-arrow-forward" class="index_btns_prev"/>
             <div class='index_btns_wrap'>
               <Button class="index-btn" icon="md-create" type="default">发帖</Button>
-              <Button class="index-btn" icon="ios-restaurant" type="primary">菜谱</Button>
+              <Button class="index-btn" icon="ios-restaurant" type="primary" @click="pullArticle">菜谱</Button>
             </div>
           </div>
         <div class="index_router">
@@ -71,6 +71,46 @@ export default {
         this.userInfo.rolename = "未登录";
         this.$store.commit('addUserInfo',this.userInfo)
       }
+    },
+    pullArticle() {
+      let oDate = new Date();
+      let nowTime = oDate.getTime();
+      oDate.setDate(oDate.getDate());
+      let year = oDate.getFullYear();
+      let month = oDate.getMonth()+1;
+      let date = oDate.getDate();
+      let hour = oDate.getHours();
+      let minute = oDate.getMinutes();
+      let second = oDate.getSeconds();
+      let targeDate = year + "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second;
+
+      this.$http.post('/pullArticle',{
+        s: 'App.Table.Create',
+        model_name: "okayapi_article",
+        uuid: JSON.parse(localStorage.getItem("info")).uuid,
+        token: localStorage.getItem("token"),
+        data: {
+          article_title: this.md5('哈哈哈哈'),
+          article_sub_title: this.md5('哈哈哈哈'),
+          article_post_time: targeDate,
+          article_author: this.md5(JSON.parse(localStorage.getItem("info")).username),
+          article_content: this.md5('哈哈哈哈'),
+          article_background: this.md5('哈哈哈哈'),
+          article_avatar: this.md5('哈哈哈哈'),
+        },
+        add_time: targeDate,
+        update_time: targeDate,
+        ext_data: JSON.stringify({
+          article_zan: [],
+          article_star: []
+        })
+      })
+      .then(res => {
+        console.log(res)
+      })
+      .catch(res => {
+        console.log(res)
+      })
     }
   },
   beforeCreate() {},

@@ -1,0 +1,26 @@
+
+.cell-pd {
+	padding: 22rpx 30rpx;
+}
+.list-pd {
+	margin-top: 50rpx;
+}
+.image_wrap {
+	width: 90%;
+	height: auto;
+	margin: 5px auto;
+}
+.image_wrap image {
+	width: 100%;
+	height: 200px;
+}
+.video_wrap {
+	width: 90%;
+	height: auto;
+	margin: 5px auto;
+}
+.video_wrap video {
+	width: 100%;
+	height: 200px;
+}
+

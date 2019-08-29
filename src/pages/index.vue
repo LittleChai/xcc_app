@@ -2,7 +2,7 @@
   <div class="index_wrap">
     <div class="index">
       <div class="left_side">
-        <xccSide :userInfo='userInfo'></xccSide>
+        <xccSide :userInfo="userInfo"></xccSide>
       </div>
 
       <div class="index_main">
@@ -13,14 +13,14 @@
             <BreadcrumbItem>主页分类3</BreadcrumbItem>
           </Breadcrumb>
         </div>
-          <div class="index_btns">
-            <Icon size='24' type="ios-arrow-back" class="index_btns_back"/>
-            <Icon size='24' type="ios-arrow-forward" class="index_btns_prev"/>
-            <div class='index_btns_wrap'>
-              <Button class="index-btn" icon="md-create" type="default">发帖</Button>
-              <Button class="index-btn" icon="ios-restaurant" type="primary" @click="pullArticle">菜谱</Button>
-            </div>
+        <div class="index_btns">
+          <Icon size="24" type="ios-arrow-back" class="index_btns_back" />
+          <Icon size="24" type="ios-arrow-forward" class="index_btns_prev" />
+          <div class="index_btns_wrap">
+            <Button class="index-btn" icon="md-create" type="default">发帖</Button>
+            <Button class="index-btn" icon="ios-restaurant" type="primary" @click="pullArticle">菜谱</Button>
           </div>
+        </div>
         <div class="index_router">
           <v-scroll>
             <transition :name="tName">
@@ -33,7 +33,7 @@
       <div class="right_side">
         <xccRightside></xccRightside>
       </div>
-      <xccHeader :userInfo='userInfo'></xccHeader>
+      <xccHeader :userInfo="userInfo"></xccHeader>
     </div>
   </div>
 </template>
@@ -44,7 +44,7 @@ import xccSide from "../components/xcc_side.vue";
 import xccBottomside from "../components/xcc_bottomside.vue";
 import xccRightside from "../components/xcc_rightside.vue";
 import xccFooter from "../components/xcc_footer.vue";
-import { setTimeout } from 'timers';
+import { setTimeout } from "timers";
 
 export default {
   name: "index",
@@ -62,14 +62,15 @@ export default {
     };
   },
   methods: {
+
     getUserInfo() {
       if (localStorage.getItem("info")) {
         let info = JSON.parse(localStorage.getItem("info"));
         this.userInfo = info;
-        this.$store.commit('addUserInfo',info)
+        this.$store.commit("addUserInfo", info);
       } else {
         this.userInfo.rolename = "未登录";
-        this.$store.commit('addUserInfo',this.userInfo)
+        this.$store.commit("addUserInfo", this.userInfo);
       }
     },
     pullArticle() {
@@ -77,40 +78,54 @@ export default {
       let nowTime = oDate.getTime();
       oDate.setDate(oDate.getDate());
       let year = oDate.getFullYear();
-      let month = oDate.getMonth()+1;
+      let month = oDate.getMonth() + 1;
       let date = oDate.getDate();
       let hour = oDate.getHours();
       let minute = oDate.getMinutes();
       let second = oDate.getSeconds();
-      let targeDate = year + "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second;
+      let targeDate =
+        year +
+        "-" +
+        month +
+        "-" +
+        date +
+        " " +
+        hour +
+        ":" +
+        minute +
+        ":" +
+        second;
 
-      this.$http.post('/pullArticle',{
-        s: 'App.Table.Create',
-        model_name: "okayapi_article",
-        uuid: JSON.parse(localStorage.getItem("info")).uuid,
-        token: localStorage.getItem("token"),
-        data: {
-          article_title: this.md5('哈哈哈哈'),
-          article_sub_title: this.md5('哈哈哈哈'),
-          article_post_time: targeDate,
-          article_author: this.md5(JSON.parse(localStorage.getItem("info")).username),
-          article_content: this.md5('哈哈哈哈'),
-          article_background: this.md5('哈哈哈哈'),
-          article_avatar: this.md5('哈哈哈哈'),
-        },
-        add_time: targeDate,
-        update_time: targeDate,
-        ext_data: JSON.stringify({
-          article_zan: [],
-          article_star: []
+      this.$http
+        .post("/pullArticle", {
+          s: "App.Table.Create",
+          model_name: "okayapi_article",
+          uuid: JSON.parse(localStorage.getItem("info")).uuid,
+          token: localStorage.getItem("token"),
+          data: {
+            article_title: this.md5("哈哈哈哈"),
+            article_sub_title: this.md5("哈哈哈哈"),
+            article_post_time: targeDate,
+            article_author: this.md5(
+              JSON.parse(localStorage.getItem("info")).username
+            ),
+            article_content: this.md5("哈哈哈哈"),
+            article_background: this.md5("哈哈哈哈"),
+            article_avatar: this.md5("哈哈哈哈")
+          },
+          add_time: targeDate,
+          update_time: targeDate,
+          ext_data: JSON.stringify({
+            article_zan: [],
+            article_star: []
+          })
         })
-      })
-      .then(res => {
-        console.log(res)
-      })
-      .catch(res => {
-        console.log(res)
-      })
+        .then(res => {
+          console.log(res);
+        })
+        .catch(res => {
+          console.log(res);
+        });
     }
   },
   beforeCreate() {},
@@ -121,9 +136,8 @@ export default {
     var delayTime = null;
     delayTime = setTimeout(function() {
       that.getUserInfo();
-      clearTimeout(delayTime)
-    },1500);
-    
+      clearTimeout(delayTime);
+    }, 1500);
   },
   beforeUpdate() {},
   updated() {},
@@ -221,10 +235,9 @@ $borderBottom: 1px solid rgb(233, 233, 233);
     .index_btns_wrap {
       // width: 100%;
       position: absolute;
-      left:35px;
+      left: 35px;
       right: 35px;
       height: 100%;
-
     }
     .index-btn {
       margin-right: 10px;

@@ -18,6 +18,14 @@ export default new Router({
       redirect: '/login'
     },
     {
+      path: '/test',
+      name: 'test',
+      component: resolve=>(require(["../components/test"],resolve)),
+      meta: {
+        index: -1
+      }
+    },
+    {
       path: '/login',
       name: 'login',
       component: resolve=>(require(["../pages/login"],resolve)),

@@ -4,7 +4,7 @@ module.exports = {
     productionSourceMap: false,
     devServer: {
         // open: process.platform === 'darwin',
-        host: 'localhost',
+        host: '192.168.1.100',
         port: 8080,
         // open: true, //配置自动启动浏览器
         proxy: {

@@ -21,7 +21,7 @@ export default {
   mounted() {
     if(!localStorage.getItem('token')) {
       this.$router.push({
-        path: '/login'
+        path: '/test'
       })
     }
     else {
@@ -37,13 +37,13 @@ export default {
   watch: {
     $route(to, from) {
       // console.log(to,from)
-      if(!localStorage.getItem('token')) {
-        if(to.name != 'login') {
-          this.$router.push({
-            path: '/login'
-          })
-        }
-      }
+      // if(!localStorage.getItem('token')) {
+      //   if(to.name != 'login') {
+      //     this.$router.push({
+      //       path: '/login'
+      //     })
+      //   }
+      // }
 
 
       if (to.meta.index > from.meta.index) {

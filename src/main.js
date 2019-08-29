@@ -13,6 +13,9 @@ import "../static/styles/reset.css";
 import "../static/styles/app.css";
 
 
+import EXIF from 'exif-js'
+Vue.prototype.EXIF = EXIF
+
 Vue.config.productionTip = false
 
 Vue.use(iview);

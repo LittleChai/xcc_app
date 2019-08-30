@@ -26,7 +26,7 @@
 
     <div class="chooseImg">
         <span>录制视频</span>	
-        <input type="file" accept="video/*" id="fileUpload" @change="uploadVideo($event)" />
+        <input type="file" accept="video/mp4" id="fileUpload" @change="uploadVideo($event)" />
     </div>
 
 
@@ -37,6 +37,8 @@
     
     <img :src="imgBase64" alt="">
     <video src="videoUrl"></video>
+
+    <video controls src="../../../V90827-140336.mp4"></video>
     <!-- <chart :childData="childData" class="echarts" @toFatherFn="getToFatherData"></chart> -->
   </div>
 </template>>
@@ -307,7 +309,9 @@ export default {
 }
 
 
-
+video {
+  width: 400px;
+}
 
 
 

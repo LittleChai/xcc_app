@@ -56,6 +56,14 @@ export default new Router({
           meta: {
             index: 12
           },
+        },
+        {
+          path: '/index/editor',
+          name: 'editor',
+          component: resolve=>(require(["../components/editor"],resolve)),
+          meta: {
+            index: 13
+          },
         }
       ]
     }

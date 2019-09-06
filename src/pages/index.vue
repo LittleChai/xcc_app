@@ -9,7 +9,7 @@
         <div class="index_bread">
           <Breadcrumb>
             <BreadcrumbItem to="/index/article">主页</BreadcrumbItem>
-            <BreadcrumbItem to="/index/editArticle">文章编辑</BreadcrumbItem>
+            <BreadcrumbItem to="/index/editor">文章编辑</BreadcrumbItem>
             <BreadcrumbItem>主页分类3</BreadcrumbItem>
           </Breadcrumb>
         </div>
@@ -17,13 +17,13 @@
           <Icon size="24" type="ios-arrow-back" class="index_btns_back" />
           <Icon size="24" type="ios-arrow-forward" class="index_btns_prev" />
           <div class="index_btns_wrap">
-            <Button class="index-btn" icon="md-create" type="default">发帖</Button>
+            <Button class="index-btn" icon="md-create" type="default" @click="toEditor">发帖</Button>
             <Button class="index-btn" icon="ios-restaurant" type="primary" @click="pullArticle">菜谱</Button>
           </div>
         </div>
         <div class="index_router">
           <v-scroll>
-            <transition :name="tName">
+            <transition :name="tName" mode="out-in" :duration="{ enter: 700, leave: 500 }">
               <router-view></router-view>
             </transition>
           </v-scroll>
@@ -62,7 +62,11 @@ export default {
     };
   },
   methods: {
-
+    toEditor() {
+      this.$router.push({
+        path: '/index/editor'
+      })
+    },
     getUserInfo() {
       if (localStorage.getItem("info")) {
         let info = JSON.parse(localStorage.getItem("info"));

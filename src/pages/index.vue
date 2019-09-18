@@ -6,20 +6,21 @@
       </div>
 
       <div class="index_main">
-        <div class="index_bread">
-          <Breadcrumb>
-            <BreadcrumbItem to="/index/article">主页</BreadcrumbItem>
-            <BreadcrumbItem to="/index/editor">文章编辑</BreadcrumbItem>
-            <BreadcrumbItem>主页分类3</BreadcrumbItem>
-          </Breadcrumb>
-        </div>
         <div class="index_btns">
-          <Icon size="24" type="ios-arrow-back" class="index_btns_back" />
-          <Icon size="24" type="ios-arrow-forward" class="index_btns_prev" />
+          <!-- <Icon size="24" type="ios-arrow-back" class="index_btns_back" /> -->
+          <!-- <Icon size="24" type="ios-arrow-forward" class="index_btns_prev" /> -->
           <div class="index_btns_wrap">
             <Button class="index-btn" icon="md-create" type="default" @click="toEditor">发帖</Button>
             <Button class="index-btn" icon="ios-restaurant" type="primary" @click="pullArticle">菜谱</Button>
           </div>
+        </div>
+
+        <div class="index_bread">
+          <Breadcrumb>
+            <BreadcrumbItem to="/index/article">主页</BreadcrumbItem>
+            <BreadcrumbItem to="/index/editor">文章编辑</BreadcrumbItem>
+            <!-- <BreadcrumbItem>主页分类3</BreadcrumbItem> -->
+          </Breadcrumb>
         </div>
         <div class="index_router">
           <v-scroll>
@@ -193,6 +194,12 @@ $borderBottom: 1px solid rgb(233, 233, 233);
   right: 246px;
 
   .index_bread {
+    position: absolute;
+    // bottom: 0;
+    left: 0;
+    // width: ;
+    top: 55px;
+    right: 0;
     width: 100%;
     height: 50px;
     line-height: 50px;
@@ -204,14 +211,10 @@ $borderBottom: 1px solid rgb(233, 233, 233);
   }
 
   .index_btns {
-    position: absolute;
-    // bottom: 0;
-    left: 0;
-    // width: ;
-    top: 55px;
-    right: 0;
+    position: relative;
+    width: 100%;
     height: 50px;
-    // background-color: white;
+    border-radius: 8px;
     box-sizing: border-box;
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     background-color: rgba(255, 255, 255, 0.1);
@@ -239,8 +242,8 @@ $borderBottom: 1px solid rgb(233, 233, 233);
     .index_btns_wrap {
       // width: 100%;
       position: absolute;
-      left: 35px;
-      right: 35px;
+      left: 0;
+      right: 0;
       height: 100%;
     }
     .index-btn {

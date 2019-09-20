@@ -108,22 +108,23 @@ export default {
           uuid: JSON.parse(localStorage.getItem("info")).uuid,
           token: localStorage.getItem("token"),
           data: {
-            article_title: this.md5("哈哈哈哈"),
-            article_sub_title: this.md5("哈哈哈哈"),
+            article_title: "哈哈哈哈",
+            article_sub_title: "哈哈哈哈",
             article_post_time: targeDate,
-            article_author: this.md5(
-              JSON.parse(localStorage.getItem("info")).username
-            ),
-            article_content: this.md5("哈哈哈哈"),
-            article_background: this.md5("哈哈哈哈"),
-            article_avatar: this.md5("哈哈哈哈")
+            article_author: 
+              JSON.parse(localStorage.getItem("info")).username,
+            article_content: "哈哈哈哈",
+            article_background: "哈哈哈哈",
+            article_avatar: "哈哈哈哈",
+            update_time: targeDate,
+            article_zan: JSON.stringify([]),
+            article_star: JSON.stringify([]),
+            ext_data: JSON.stringify({
+              
+            })
           },
           add_time: targeDate,
           update_time: targeDate,
-          ext_data: JSON.stringify({
-            article_zan: [],
-            article_star: []
-          })
         })
         .then(res => {
           console.log(res);
@@ -131,6 +132,23 @@ export default {
         .catch(res => {
           console.log(res);
         });
+    },
+    getArticle() {
+      this.$http.post("/getArticle",{
+        s: 'App.Table.FreeQuery',
+        uuid: JSON.parse(localStorage.getItem("info")).uuid,
+        token: localStorage.getItem("token"),
+        model_name: 'okayapi_article',
+        where: [['id','>=','1']],
+        page: 1,
+        perpage: 30
+      })
+      .then(res => {
+        console.log(res)
+      })
+      .catch(res => {
+        console.log(res)
+      })
     }
   },
   beforeCreate() {},
@@ -141,6 +159,7 @@ export default {
     var delayTime = null;
     delayTime = setTimeout(function() {
       that.getUserInfo();
+      // that.getArticle();
       clearTimeout(delayTime);
     }, 1500);
   },
@@ -163,6 +182,10 @@ export default {
 <style lang="scss" scoped>
 // 全局颜色定义
 $borderBottom: 1px solid rgb(233, 233, 233);
+
+body {
+  color: #000000;
+}
 
 .index_wrap {
   width: 100%;
@@ -261,7 +284,7 @@ $borderBottom: 1px solid rgb(233, 233, 233);
     bottom: 10px;
     left: 0px;
     right: 0;
-    top: 105px;
+    top: 110px;
     background-color: rgba(255, 255, 255, 0);
     overflow: hidden;
     box-sizing: border-box;

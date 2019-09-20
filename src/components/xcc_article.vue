@@ -1,17 +1,17 @@
 <template id='xcc_article'>
     <div class="article_wrap">
-        <div class="article_child" v-for='(item,index) in testArticle' :key='index'>
+        <div class="article_child" v-for='(item,index) in articleArr' :key='index'>
             <div class="article_header">
                 <div class="article_header_avatar">
                     <img src="../../static/images/default.jpg" alt="">
                 </div>
-                <div class="article_header_name">树影下的月光</div>
-                <div class="article_header_time">发布于: 2019年8月28日 10:50:55</div>
+                <div class="article_header_name">{{item.article_author}}</div>
+                <div class="article_header_time">发布于: {{item.add_time}}</div>
             </div>
             <div class="article_center">
-                <div class="article_center_title">我是文章大标题哈哈哈哈哈</div>
+                <div class="article_center_title">{{item.article_title}}</div>
                 <div class="article_center_main">
-                    我是内容
+                    {{item.article_content}}
                     <p>我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容</p>		    
                     <p>我也是内容啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>		
                     <p>我更是内容啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>		
@@ -57,11 +57,29 @@ export default {
                 {
 
                 }
-            ]
+            ],
+            articleArr: []
         }
     },
     methods: {
-
+        getArticle() {
+        this.$http.post("/getArticle",{
+            s: 'App.Table.FreeQuery',
+            uuid: JSON.parse(localStorage.getItem("info")).uuid,
+            token: localStorage.getItem("token"),
+            model_name: 'okayapi_article',
+            where: [['id','>=','1']],
+            page: 1,
+            perpage: 30
+        })
+        .then(res => {
+            console.log(res);
+            this.articleArr = res.data.list;
+        })
+        .catch(res => {
+            console.log(res)
+        })
+        }
     },
     beforeCreate() {
 
@@ -70,7 +88,7 @@ export default {
 
     },
     beforeMount() {
-
+        this.getArticle();
     },
     mounted() {
 

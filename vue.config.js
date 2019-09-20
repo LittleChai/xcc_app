@@ -1,7 +1,7 @@
 module.exports = {
     runtimeCompiler: true,
     publicPath: './', // 设置打包文件相对路径
-    productionSourceMap: false,
+    productionSourceMap: true,
     devServer: {
         // open: process.platform === 'darwin',
         host: 'localhost',
@@ -12,7 +12,7 @@ module.exports = {
                 //对应自己的接口
                 // target: 'http://192.168.1.118:3000',
                 target: 'http://localhost:6666',
-                // target: 'http://apps.wuyayu.com:3000',
+                // target: 'http://apps.littlechai.cn:3000',
                 changeOrigin: true,
                 ws: true,
                 pathRewrite: {

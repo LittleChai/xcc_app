@@ -187,6 +187,34 @@ router.post('/pullArticle',async(ctx,next) =>{
     ctx.body = result.data;
 })
 
+//获取博客数量
+router.post('/getArticle',async(ctx,next) =>{
+    let val =  ctx.request.body;
+    const register = async(data) => {
+        return new Promise((resolve,reject)=> {
+            axios.post('/?s='+data.s+'&app_key='+appKey,{
+                model_name: data.model_name,
+                uuid: data.uuid,
+                token: data.token,
+                where: data.where,
+                page: data.page,
+                perpage: data.perpage,    
+            })
+            .then(res => {
+                console.log(res)
+                resolve(res.data)
+            })
+            .catch(res => {
+                resolve(res.data)
+            })
+        })
+    }
+
+    let result = await register(val);
+    await next();
+    ctx.body = result.data;
+})
+
 
 router.get('/exit',async(ctx) => {
     ctx.body = 'exit'

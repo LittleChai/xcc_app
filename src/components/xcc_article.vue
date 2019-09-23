@@ -3,21 +3,16 @@
         <div class="article_child" v-for='(item,index) in articleArr' :key='index'>
             <div class="article_header">
                 <div class="article_header_avatar">
-                    <img src="../../static/images/default.jpg" alt="">
+                    <img :src="item.article_avatar" alt="">
                 </div>
                 <div class="article_header_name">{{item.article_author}}</div>
                 <div class="article_header_time">发布于: {{item.add_time}}</div>
             </div>
             <div class="article_center">
-                <div class="article_center_title">{{item.article_title}}</div>
-                <div class="article_center_main">
-                    {{item.article_content}}
-                    <p>我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容</p>		    
-                    <p>我也是内容啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>		
-                    <p>我更是内容啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>		
-                    <p>我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容</p>		    
-                    <p>我也是内容啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>		
-                    <p>我更是内容啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+                <div class="article_center_title">{{item.article_title}}<span>({{item.article_sub_title}})</span></div>
+                <!-- <div class="article_center_sub_title">{{item.article_sub_title}}</div> -->
+                <div class="article_center_main" v-html="item.article_content">
+
                 </div>
                 <div class="article_center_footer">
                     <div class="article_center_more">查看详情<span>››</span></div>
@@ -70,11 +65,15 @@ export default {
             model_name: 'okayapi_article',
             where: [['id','>=','1']],
             page: 1,
-            perpage: 30
+            perpage: 10
         })
         .then(res => {
             console.log(res);
-            this.articleArr = res.data.list;
+            for(var i=res.data.list.length-1; i>=0; i--) {
+                console.log(res.data.list[i])
+                this.articleArr.push(res.data.list[i])
+            }
+            // this.articleArr = res.data.list;
         })
         .catch(res => {
             console.log(res)
@@ -174,6 +173,23 @@ export default {
                     line-height: 40px;
                     font-size: 18px;
                     color: black;
+                    // text-align: center;
+
+                    span {
+                        font-size: 12px;
+                        color: rgba(166, 166, 166, 1);
+                    }
+                }
+                .article_center_sub_title {
+                    width: 100%;
+                    height: 26px;
+                    line-height: 26px;
+                    font-size: 12px;
+                    color: black;
+                    position: relative;
+                    top: -16px;
+                    transform: scale(0.9);
+                    color: rgba(66, 66, 66, 1);
                     // text-align: center;
                 }
 

@@ -1,8 +1,8 @@
 <template id='editor'>
   <div class="editor">
     <div class="editor_title">
-      <Input v-model="title" placeholder="请输入文章标题" style="width: 46.5%" />
-      <Input v-model="title1" placeholder="请输入文章副标题" style="width: 46.5%" />
+      <Input v-model="title" placeholder="请输入文章标题" style="width: 47%" />
+      <Input v-model="title1" placeholder="请输入文章副标题" style="width: 47%" />
       <Button class="editor_btn" type="primary" style="width: 5%" @click="pull" >发布</Button> 
     </div>
     <div id="editor" class="editor1" ></div>
@@ -167,6 +167,7 @@ export default {
 
 .editor_btn {
   margin-right: 6px;
+  height: 36px;
   position: relative;
   top: 2px;
 }

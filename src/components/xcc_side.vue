@@ -15,10 +15,19 @@
 
 
       <div v-if="!bol" class="side_avatar">
+        <div class="side_change">
+          <input style="position: absolute; z-index: 99; opacity: 0; cursor: pointer;" type="file" accept="image/*" @change="uploadAvatar1">
+          <Icon style="position: absolute; z-index: 98; cursor: pointer;" class="side_change" type="ios-settings" />
+        </div>
         <img src="http://data.wuyayu.com/default.jpg" alt />
       </div>
 
       <div v-if="bol" class="side_avatar">
+        <div class="side_change">
+          <input style="position: absolute; z-index: 99; opacity: 0; cursor: pointer;" type="file" accept="image/*" @change="uploadAvatar2">
+          <Icon style="position: absolute; z-index: 98; cursor: pointer;" class="side_change" type="ios-settings" />
+        </div>
+        <Icon class="side_change" type="ios-settings" />
         <img
           :src="FuserInfo.ext_info.yesapi_avatar == '' ? 'http://data.wuyayu.com/default.jpg' :  FuserInfo.ext_info.yesapi_avatar"
           alt
@@ -102,13 +111,19 @@ export default {
   methods: {
     getUserInfo() {
       this.FuserInfo = this.userInfo;
+    },
+    uploadAvatar1(e) {
+      console.log(e)
+    },
+    uploadAvatar2(e) {
+      console.log(e)
     }
   },
   beforeCreate() {},
   created() {},
   beforeMount() {},
   mounted() {
-    // this.getUserInfo();
+    
   },
   beforeUpdate() {},
   updated() {},
@@ -186,11 +201,25 @@ $whiteColor: #eaebed;
       height: 100px;
       margin: 0px auto 5px auto;
       border-radius: 50%;
-      overflow: hidden;
+      // overflow: hidden;
+      position: relative;
 
       img {
         width: 100%;
         height: 100%;
+        border-radius: 50%;
+      }
+
+      .side_change {
+        position: absolute;
+        width: 26px;
+        height: 26px;
+        right: 0px;
+        bottom: -2px;
+        font-size: 26px;
+        color: white;
+        cursor: pointer;
+        overflow: hidden;
       }
     }
 

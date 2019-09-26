@@ -2,36 +2,34 @@
   <div class="side">
     <div class="top_side">
       <div class="top_sm">
-        <Tooltip content="缩小" placement="left" theme='light'>
-           <Icon type="md-return-left" size='22'/>   
+        <Tooltip content="缩小" placement="left" theme="light">
+          <Icon type="md-return-left" size="22" />
         </Tooltip>
-        
-      </div>	  
+      </div>
       <div class="top_edit">
-        <Tooltip content="更换背景" placement="right" theme='light'>
-          <Icon type="ios-color-palette" size='23'/>    
+        <Tooltip content="更换背景" placement="right" theme="light">
+          <Icon type="ios-color-palette" size="23" />
         </Tooltip>
       </div>
 
 
-      <div v-if="!bol" class="side_avatar">
+      <div class="side_avatar">
         <div class="side_change">
-          <input style="position: absolute; z-index: 99; opacity: 0; cursor: pointer;" type="file" accept="image/*" @change="uploadAvatar1">
-          <Icon style="position: absolute; z-index: 98; cursor: pointer;" class="side_change" type="ios-settings" />
-        </div>
-        <img src="http://data.wuyayu.com/default.jpg" alt />
-      </div>
-
-      <div v-if="bol" class="side_avatar">
-        <div class="side_change">
-          <input style="position: absolute; z-index: 99; opacity: 0; cursor: pointer;" type="file" accept="image/*" @change="uploadAvatar2">
-          <Icon style="position: absolute; z-index: 98; cursor: pointer;" class="side_change" type="ios-settings" />
+          <input
+            style="position: absolute; z-index: 99; opacity: 0; cursor: pointer;"
+            type="file"
+            accept="image/*"
+            @change="uploadAvatar1"
+          />
+          <Icon
+            style="position: absolute; z-index: 98; cursor: pointer;"
+            class="side_change"
+            type="ios-settings"
+          />
         </div>
         <Icon class="side_change" type="ios-settings" />
-        <img
-          :src="FuserInfo.ext_info.yesapi_avatar == '' ? 'http://data.wuyayu.com/default.jpg' :  FuserInfo.ext_info.yesapi_avatar"
-          alt
-        />
+        <img v-if="FuserInfo.yesapi_avatar == ''" src="../../static/images/default.jpg" alt/>
+        <img v-else :src="FuserInfo.yesapi_avatar" alt />
       </div>
 
       <div class="side_name">
@@ -39,15 +37,11 @@
         {{FuserInfo.username}}
       </div>
 
-      <div class="side_text">
-        暂无签名
-      </div>
+      <div class="side_text">{{FuserInfo.say}}</div>
     </div>
 
     <div class="bottom_side">
-
       <div class="side_div">
-
         <div class="side_div_li">
           <span class="side_span">99</span>
           <span>动态</span>
@@ -60,18 +54,21 @@
           <span class="side_span">99</span>
           <span>粉丝</span>
         </div>
-
       </div>
 
       <div class="side_list">
         <div class="side_list_header">导航列表</div>
-        <div class="side_list_child" v-for="(item,index) in menuArr" :key='index' :data-path='item.path'>
-          <Icon :type="item.icon" size='18' class="side_list_icon"/>
+        <div
+          class="side_list_child"
+          v-for="(item,index) in menuArr"
+          :key="index"
+          :data-path="item.path"
+        >
+          <Icon :type="item.icon" size="18" class="side_list_icon" />
           {{item.name}}
-          <Icon type="ios-arrow-forward" size='18' class="side_list_arrow"/>
+          <Icon type="ios-arrow-forward" size="18" class="side_list_arrow" />
         </div>
       </div>
-
     </div>
   </div>
 </template>
@@ -81,28 +78,30 @@ export default {
   name: "xcc_topside",
   data() {
     return {
-      FuserInfo: {},
+      FuserInfo: {
+        // yesapi_avatar: ''
+      },
       bol: false,
       menuArr: [
         {
-          name: '个人中心',
-          path: '/index/menu1',
-          icon: 'md-cog'
+          name: "个人中心",
+          path: "/index/menu1",
+          icon: "md-cog"
         },
         {
-          name: '私密空间',
-          path: '/index/menu1',
-          icon: 'md-cog'
+          name: "私密空间",
+          path: "/index/menu1",
+          icon: "md-cog"
         },
         {
-          name: '收藏管理',
-          path: '/index/menu1',
-          icon: 'md-cog'
+          name: "收藏管理",
+          path: "/index/menu1",
+          icon: "md-cog"
         },
         {
-          name: '等待开发',
-          path: '/index/menu1',
-          icon: 'md-cog'
+          name: "等待开发",
+          path: "/index/menu1",
+          icon: "md-cog"
         }
       ]
     };
@@ -110,20 +109,137 @@ export default {
   props: ["userInfo"],
   methods: {
     getUserInfo() {
-      this.FuserInfo = this.userInfo;
+      let data = JSON.parse(localStorage.getItem('info'));
+      this.FuserInfo = data;
+      this.FuserInfo.say = data.ext_info.say;
+      this.FuserInfo.yesapi_avatar = data.ext_info.yesapi_avatar;
+      console.log(this.FuserInfo)
+      // 头像地址重组
+      let oldUrl = this.FuserInfo.ext_info.yesapi_avatar;
+      let oldArr = oldUrl.split('\/');
+
+      let newUrl = 'http://littlechai.wuyayu.com/'+oldArr[oldArr.length-1];
+      this.FuserInfo.yesapi_avatar = newUrl;
+      console.log(newUrl)
+
     },
     uploadAvatar1(e) {
-      console.log(e)
+      // console.log(e)
+      let data = e;
+      let reader = new FileReader();
+      let that = this;
+      reader.readAsDataURL(e.target.files[0]);
+      reader.onload = function(e) {
+        console.log(data);
+        // 获取上传图片名称
+        let arr = data.target.value.split("\\");
+        let fileName = arr[arr.length - 1];
+
+        // 获取图片类型
+        let arr1 = fileName.split(".");
+        let type = arr1[arr1.length - 1];
+
+        // that.uploadBase64(e.target.result,fileName,type);
+        that.uploadAvatar(e.target.result, fileName, type);
+
+        // console.log(e.target.result);
+      };
     },
     uploadAvatar2(e) {
-      console.log(e)
-    }
+      let data = e;
+      let reader = new FileReader();
+      let that = this;
+      reader.readAsDataURL(e.target.files[0]);
+      reader.onload = function(e) {
+        console.log(data);
+        // 获取上传图片名称
+        let arr = data.target.value.split("\\");
+        let fileName = arr[arr.length - 1];
+
+        // 获取图片类型
+        let arr1 = fileName.split(".");
+        let type = arr1[arr1.length - 1];
+
+        // that.uploadBase64(e.target.result,fileName,type);
+        that.uploadAvatar(e.target.result, fileName, type);
+      };
+    },
+    uploadBase64(base64, fileName, fileType) {
+      this.$http
+        .post("/uploadImage", {
+          s: "App.CDN.UploadImgByBase64",
+          uuid: JSON.parse(localStorage.getItem("info")).uuid,
+          token: localStorage.getItem("token"),
+          file: base64,
+          file_name: fileName,
+          file_type: fileType
+        })
+        .then(res => {
+          console.log(res);
+          if (res.data.err_code == 0) {
+            let url = res.data.url;
+            let urlArr = url.split("/");
+            let upUrl =
+              "http://littlechai.wuyayu.com/" + urlArr[urlArr.length - 1];
+            console.log(upUrl);
+          } else {
+            this.$Message.warning(res.data.err_msg);
+          }
+        })
+        .catch(res => {
+          console.log(res);
+        });
+    },
+
+    uploadAvatar(base64, fileName, fileType) {
+      this.$http
+        .post("/uploadAvatar", {
+          s: "App.User.UploadAvatar",
+          uuid: JSON.parse(localStorage.getItem("info")).uuid,
+          other_uuid: JSON.parse(localStorage.getItem("info")).uuid,
+          token: localStorage.getItem("token"),
+          file: base64
+        })
+        .then(res => {
+          console.log(res);
+          if (res.data.err_code == 0) {
+            this.$Message.success("更新成功");
+            this.updateUser();
+          } else {
+            this.$Message.warning(res.data.err_msg);
+          }
+        })
+        .catch(res => {
+          console.log(res);
+        });
+    },
+    updateUser() {
+      this.$http
+        .post("/getUserInfo", {
+          s: "App.user.profile",
+          uuid: JSON.parse(localStorage.getItem("info")).uuid,
+          token: localStorage.getItem("token"),
+        })
+        .then(res => {
+          console.log(res);
+          localStorage.setItem("info", JSON.stringify(res.data.info));
+          this.updateVuex(res.data.info);
+        })
+        .catch(res => {
+          console.log(res);
+        });
+    },
+    // 更新vuex
+    updateVuex(val) {
+      this.$store.commit('addUserInfo',val);
+      this.getUserInfo();
+    },
   },
   beforeCreate() {},
   created() {},
   beforeMount() {},
   mounted() {
-    
+    this.getUserInfo();
   },
   beforeUpdate() {},
   updated() {},
@@ -131,7 +247,8 @@ export default {
   destroyed() {},
   watch: {
     userInfo(oldVal, newVal) {
-      this.FuserInfo = oldVal;
+      this.getUserInfo();
+      // this.FuserInfo = oldVal;
       this.bol = true;
     }
   }
@@ -148,12 +265,11 @@ $whiteColor: #eaebed;
 }
 
 .side {
-    width: 220px;
-    height: 100%;
-    min-height: 720px;
-    box-sizing: border-box;
-    // padding: 20px 0 0 0;
-
+  width: 220px;
+  height: 100%;
+  min-height: 720px;
+  box-sizing: border-box;
+  // padding: 20px 0 0 0;
 
   .top_side {
     width: 220px;
@@ -172,7 +288,7 @@ $whiteColor: #eaebed;
       text-align: center;
       line-height: 30px;
       cursor: pointer;
-      transition: all .2s ease;
+      transition: all 0.2s ease;
 
       &:hover {
         color: white;
@@ -189,7 +305,7 @@ $whiteColor: #eaebed;
       text-align: center;
       line-height: 30px;
       cursor: pointer;
-      transition: all .2s ease;
+      transition: all 0.2s ease;
 
       &:hover {
         color: white;
@@ -277,18 +393,18 @@ $whiteColor: #eaebed;
         width: 33.333%;
         height: 100%;
         text-align: center;
-        position: relative;  
+        position: relative;
         cursor: pointer;
 
-         &::after {
-           content: '';
-            position: absolute;
-            top: 14px;
-            bottom: 12px;
-            width: 1px;
-            background-color: rgba(166, 166, 166, 0.2);
-            right: 0;
-          }
+        &::after {
+          content: "";
+          position: absolute;
+          top: 14px;
+          bottom: 12px;
+          width: 1px;
+          background-color: rgba(166, 166, 166, 0.2);
+          right: 0;
+        }
         span {
           display: inline-block;
           width: 100%;
@@ -299,7 +415,6 @@ $whiteColor: #eaebed;
           position: relative;
           top: -2px;
         }
-        
 
         .side_span {
           line-height: 38px;
@@ -327,33 +442,33 @@ $whiteColor: #eaebed;
       }
 
       .side_list_child {
-          width: 100%;
-          height: 44px;
-          line-height: 44px;
-          color: #b4b6bd;
-          font-size: 14px;
-          font-weight: bold;
-          position: relative;
-          cursor: pointer;
-          transition: all .2s ease;
-          box-sizing: border-box;
-          padding-left: 50px;
-          &:hover {
-            background-color: rgb(50, 55, 74);
-            color: white;
-          }
+        width: 100%;
+        height: 44px;
+        line-height: 44px;
+        color: #b4b6bd;
+        font-size: 14px;
+        font-weight: bold;
+        position: relative;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-sizing: border-box;
+        padding-left: 50px;
+        &:hover {
+          background-color: rgb(50, 55, 74);
+          color: white;
+        }
 
-          .side_list_icon {
-            position: absolute;
-            top: 12px;
-            left: 15px;
-          }
+        .side_list_icon {
+          position: absolute;
+          top: 12px;
+          left: 15px;
+        }
 
-          .side_list_arrow {
-            position: absolute;
-            right: 10px;
-            top: 12px;
-          }
+        .side_list_arrow {
+          position: absolute;
+          right: 10px;
+          top: 12px;
+        }
       }
     }
   }

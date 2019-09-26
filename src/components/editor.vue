@@ -81,7 +81,7 @@ export default {
               JSON.parse(localStorage.getItem("info")).username,
             article_content: this.formArticle,
             article_background: "",
-            article_avatar: "http://b-ssl.duitang.com/uploads/item/201810/18/20181018162951_kgwzm.thumb.700_0.jpeg",
+            article_avatar: JSON.parse(localStorage.getItem("info")).ext_info.yesapi_avatar,
             update_time: targeDate,
             article_zan: JSON.stringify([]),
             article_star: JSON.stringify([]),
@@ -138,7 +138,8 @@ export default {
 
         // 举例：假如上传图片成功后，服务器端返回的是 {url:'....'} 这种格式，即可这样插入图片：
         var url = result.data;
-        insertImg(url);
+        console.log(url)
+        // insertImg(url);
 
         // result 必须是一个 JSON 格式字符串！！！否则报错
       }

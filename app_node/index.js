@@ -6,6 +6,7 @@ const router = require('koa-router')()
 const axios = require('axios')
 const md5 = require('js-md5')
 const global = require('./global.js')
+const co = require('co-body')
 const appKey = global.app_key;
 const appSecret = global.app_secret;
 
@@ -199,6 +200,62 @@ router.post('/getArticle',async(ctx,next) =>{
                 where: data.where,
                 page: data.page,
                 perpage: data.perpage,    
+            })
+            .then(res => {
+                console.log(res)
+                resolve(res.data)
+            })
+            .catch(res => {
+                resolve(res.data)
+            })
+        })
+    }
+
+    let result = await register(val);
+    await next();
+    ctx.body = result.data;
+})
+
+
+// 上传图片
+router.post('/uploadImage',async(ctx,next) =>{
+    let val =  ctx.request.body;
+    const register = async(data) => {
+        return new Promise((resolve,reject)=> {
+            axios.post('/?s='+data.s+'&app_key='+appKey,
+            {
+                uuid: data.uuid,
+                token: data.token,
+                file: data.file,
+                file_name: data.file_name,
+                file_type: data.file_type,    
+            }
+            )
+            .then(res => {
+                console.log(res)
+                resolve(res.data)
+            })
+            .catch(res => {
+                resolve(res.data)
+            })
+        })
+    }
+
+    let result = await register(val);
+    await next();
+    ctx.body = result.data;
+})
+
+// 更新头像
+router.post('/uploadAvatar',async(ctx,next) =>{
+    let val =  ctx.request.body;
+    const register = async(data) => {
+        return new Promise((resolve,reject)=> {
+            axios.post('/?s='+data.s+'&app_key='+appKey,{
+                uuid: data.uuid,
+                other_uuid: data.other_uuid,
+                token: data.token,
+                file: data.file,  
             })
             .then(res => {
                 console.log(res)

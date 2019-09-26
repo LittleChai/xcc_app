@@ -285,6 +285,11 @@ export default {
       });
     },
 
+    // 更新vuex
+    updateVuex(val) {
+      this.$store.commit('addUserInfo',val)
+    },
+
     // 更改登录类别
     changeType(val) {
       this.type = val;
@@ -390,7 +395,8 @@ export default {
                     });
                     that.userName = '';
                     that.password = '';
-                  },1000)
+                  },200)
+                  that.updateVuex(res.data.info);
 
                 })
                 .catch(res => {
@@ -460,6 +466,11 @@ export default {
   },
   mounted() {
     // console.log(this.$http)
+  },
+  beforeMount() {
+    if(localStorage.getItem('info')) {
+      this.updateVuex(JSON.parse(localStorage.getItem('info')))
+    };
   }
 };
 </script>

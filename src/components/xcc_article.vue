@@ -3,7 +3,8 @@
     <div class="article_child" v-for="(item,index) in articleArr" :key="index">
       <div class="article_header">
         <div class="article_header_avatar">
-          <img :src="item.article_avatar" alt />
+          <img v-if="item.article_avatar != 'http://littlechai.wuyayu.com/' " :src="item.article_avatar" alt />
+          <img v-else src="../../static/images/default.jpg" alt />
         </div>
         <div class="article_header_name">{{item.article_author}}</div>
         <div class="article_header_time">发布于: {{item.add_time}}</div>
@@ -22,18 +23,18 @@
           </div>
 
           <div class="article_center_icon">
-            <Icon type="ios-thumbs-up-outline" size="16" class="article_center_icons" />
+            <Icon color='rgb(45,183,245)' type="ios-thumbs-up-outline" size="16" class="article_center_icons" />
             <!-- <Icon type="ios-thumbs-up" size='16' class="article_center_icons"/> -->
-            <span>点赞</span>
+            <span style="color: rgb(45,183,245)">点赞</span>
           </div>
           <div class="article_center_icon">
-            <Icon type="ios-star-outline" size="16" class="article_center_icons" />
+            <Icon color='rgb(255,153,0)' type="ios-star-outline" size="16" class="article_center_icons" />
             <!-- <Icon type="ios-star" size='16' class="article_center_icons"/> -->
-            <span>收藏</span>
+            <span style="color: rgb(255,153,0)">收藏</span>
           </div>
           <div class="article_center_icon">
-            <Icon type="ios-chatboxes-outline" size="16" class="article_center_icons" />
-            <span>评论</span>
+            <Icon color='rgb(81,90,110)' type="ios-chatboxes-outline" size="16" class="article_center_icons" />
+            <span style="color: rgb(81,90,110)">评论</span>
           </div>
         </div>
       </div>

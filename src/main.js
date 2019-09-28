@@ -28,8 +28,46 @@ Vue.use(vuescroll, {
       detectResize: true
     },
     scrollPanel: {
-      scrollingX: false,
+      scrollingX: true,
       scrollingY: true,
+      speed: 300,
+      easing: 'easeInQuint'
+    },
+    rail: {
+      background: 'rgba(255,255,255,0)',
+      opacity: 0,
+      size: '6px',
+      specifyBorderRadius: false,
+      gutterOfEnds: null,
+      gutterOfSide: '2px',
+      keepShow: false
+    },
+    bar: {
+      showDelay: 1000,
+      onlyShowBarOnScroll: false,
+      keepShow: true,
+      background: 'rgb(255,255,255)',
+      opacity: 1,
+      hoverStyle: false,
+      specifyBorderRadius: false,
+      minSize: false,
+      size: '5px',
+      disable: false,
+    }
+  }, // 在这里设置全局默认配置
+  name: 'v-scroll' // 在这里自定义组件名字，默认是vueScroll
+}); 
+
+Vue.use(vuescroll, {
+  ops: {
+    vuescroll: {
+      mode: 'native',
+      sizeStrategy: 'percent',
+      detectResize: true
+    },
+    scrollPanel: {
+      scrollingX: true,
+      scrollingY: false,
       speed: 300,
       easing: 'easeInQuint'
     },
@@ -55,8 +93,8 @@ Vue.use(vuescroll, {
       disable: false,
     }
   }, // 在这里设置全局默认配置
-  name: 'v-scroll' // 在这里自定义组件名字，默认是vueScroll
-});  
+  name: 'v-scrollx' // 在这里自定义组件名字，默认是vueScroll
+}); 
 
 
 

@@ -118,7 +118,7 @@ export default {
       let oldUrl = this.FuserInfo.ext_info.yesapi_avatar;
       let oldArr = oldUrl.split('\/');
 
-      let newUrl = 'http://littlechai.wuyayu.com/'+oldArr[oldArr.length-1];
+      let newUrl = 'http://data.littlechai.cn/'+oldArr[oldArr.length-1];
       this.FuserInfo.yesapi_avatar = newUrl;
       console.log(newUrl)
 
@@ -180,7 +180,7 @@ export default {
             let url = res.data.url;
             let urlArr = url.split("/");
             let upUrl =
-              "http://littlechai.wuyayu.com/" + urlArr[urlArr.length - 1];
+              "http://data.littlechai.cn/" + urlArr[urlArr.length - 1];
             console.log(upUrl);
           } else {
             this.$Message.warning(res.data.err_msg);

@@ -3,7 +3,7 @@
     <div class="editor_title">
       <Input v-model="title" placeholder="请输入文章标题" style="width: 47%" />
       <Input v-model="title1" placeholder="请输入文章副标题" style="width: 47%" />
-      <Button class="editor_btn" type="primary" style="width: 5%" @click="pull">发布</Button>
+      <Button class="editor_btn" type="success" style="width: 5%" @click="pull">发布</Button>
     </div>
     <div class="editor_main">
       <v-scroll>
@@ -55,32 +55,121 @@ export default {
       title1: "",
       formArticle: "",
       maxLength: 10,
-      blobArr: [
-        // {
-        //   name: 'xxx.png',
-        //   type: 'png',
-        //   blob: 'http://xxxxx'
-        // },
-      ],
+      blobArr: [],
       fileArr: [],
       upIndex: 0,
       upNum: 0,
+      imgs: []
     };
   },
   methods: {
+    uploadBase64(base64, fileName, fileType) {
+      this.$http
+        .post("/uploadImage", {
+          s: "App.CDN.UploadImgByBase64",
+          uuid: JSON.parse(localStorage.getItem("info")).uuid,
+          token: localStorage.getItem("token"),
+          file: base64,
+          file_name: fileName,
+          file_type: fileType
+        })
+        .then(res => {
+          console.log(res);
+          if (res.data.err_code == 0) {
+            let url = res.data.url;
+            let urlArr = url.split("/");
+            let upUrl =
+              "http://data.littlechai.cn/" + urlArr[urlArr.length - 1];
+            console.log(upUrl);
+          } else {
+            this.$Message.warning(res.data.err_msg);
+          }
+        })
+        .catch(res => {
+          console.log(res);
+        });
+    },
+
     delEditorBlob(index) {
       console.log(index)
       let copyBlobArr = this.blobArr;
       copyBlobArr.splice(index,1);
       this.blobArr = copyBlobArr;
+
+      let copyBlobArr1 = this.fileArr;
+      copyBlobArr1.splice(index,1);
+      this.fileArr = copyBlobArr1;
     },
     pull() {
       if (this.title == "" || this.title1 == "" || this.formArticle == "") {
         this.$Message.warning("内容请填写完整");
       } else {
-        this.pullArticle();
+        // this.pullArticle();
+        this.uploadImages();
       }
     },
+
+    uploadImages() {
+      // console.log(this.fileArr[0])
+      let that = this;
+      let index = 0;
+      let allIndex = this.fileArr.length;
+
+      async function ups() {
+        if(index < allIndex) {
+          await upss();
+        }
+        else {
+          console.log('complete')
+        }
+      }
+
+      function upss() {
+        let f = that.fileArr[index];
+        let reader = new FileReader();
+        console.log(f)
+        reader.readAsDataURL(f);
+        reader.onload = function(e) {
+          // console.log(e);
+          // 获取上传图片名称
+          let fileName = f.name;
+          let fileType = f.type;
+          that.$http
+            .post("/uploadImage", {
+              s: "App.CDN.UploadImgByBase64",
+              uuid: JSON.parse(localStorage.getItem("info")).uuid,
+              token: localStorage.getItem("token"),
+              file: e.target.result,
+              file_name: fileName,
+              file_type: fileType
+            })
+            .then(res => {
+              console.log(res);
+              if (res.data.err_code == 0) {
+                let url = res.data.url;
+                let urlArr = url.split("/");
+                let upUrl =
+                  "http://data.littlechai.cn/" + urlArr[urlArr.length - 1];
+                console.log(upUrl);
+                that.imgs.push(upUrl);
+                index++;
+                ups();
+              } else {
+                that.$Message.warning(res.data.err_msg);
+              }
+            })
+            .catch(res => {
+              // console.log(res);
+              that.$Message.warning('上传失败');
+            });
+        };
+      }
+
+      ups();
+
+
+    },
+
     pullArticle() {
       let oDate = new Date();
       let nowTime = oDate.getTime();
@@ -122,6 +211,7 @@ export default {
             update_time: targeDate,
             article_zan: JSON.stringify([]),
             article_star: JSON.stringify([]),
+            artcle_images: JSON.stringify(this.imgs),
             ext_data: JSON.stringify({
               showArticle: true
             })
@@ -172,13 +262,9 @@ export default {
       function pushAsync(arr) {
         let blob = new Blob([arr[that.upIndex]]);
         let url = URL.createObjectURL(blob);
-        // console.log(arr[that.upIndex].name)
-        // let names = arr[that.upIndex].name
         let obj = {
           url: url,
           info: arr[that.upIndex]
-          // imgName: names,
-          // imgType: arr[that.upIndex].type
         }
         that.blobArr.push(obj);
         that.fileArr.push(arr[that.upIndex]);
@@ -186,10 +272,6 @@ export default {
         ups();
       }
 
-      // let formData = new FormData();
-      // formData.append('image',val);
-      // let blob = new Blob([val]);
-      // let url = URL.createObjectURL(blob);
     },
 
   },
@@ -259,7 +341,8 @@ export default {
   margin-right: 6px;
   height: 36px;
   position: relative;
-  top: 2px;
+  top: 0px;
+  left: 6px;
 }
 
 .editor {

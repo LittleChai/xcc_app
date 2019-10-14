@@ -11,6 +11,7 @@ module.exports = {
             '/api': {
                 //对应自己的接口
                 // target: 'http://192.168.1.118:3000',
+                // target: 'http://node.littlechai.cn:3000',
                 target: 'http://localhost:6666',
                 // target: 'http://apps.littlechai.cn:3000',
                 changeOrigin: true,

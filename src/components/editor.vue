@@ -3,7 +3,7 @@
     <div class="editor_title">
       <Input v-model="title" placeholder="请输入文章标题" style="width: 47%" />
       <Input v-model="title1" placeholder="请输入文章副标题" style="width: 47%" />
-      <Button class="editor_btn" type="success" style="width: 5%" @click="pull">发布</Button>
+      <Button :loading="loading" class="editor_btn" type="success" style="width: 5%" @click="pull">发布</Button>
     </div>
     <div class="editor_main">
       <v-scroll>
@@ -59,7 +59,8 @@ export default {
       fileArr: [],
       upIndex: 0,
       upNum: 0,
-      imgs: []
+      imgs: [],
+      loading: false
     };
   },
   methods: {
@@ -101,11 +102,14 @@ export default {
       this.fileArr = copyBlobArr1;
     },
     pull() {
-      if (this.title == "" || this.title1 == "" || this.formArticle == "") {
-        this.$Message.warning("内容请填写完整");
-      } else {
-        // this.pullArticle();
-        this.uploadImages();
+      if(this.loading == false) {
+        if (this.title == "" || this.title1 == "" || this.formArticle == "") {
+          this.$Message.warning("内容请填写完整");
+        } else {
+          // this.pullArticle();
+          this.loading = true;
+          this.uploadImages();
+        }
       }
     },
 
@@ -120,7 +124,8 @@ export default {
           await upss();
         }
         else {
-          console.log('complete')
+          console.log('complete');
+          that.pullArticle();
         }
       }
 
@@ -155,12 +160,14 @@ export default {
                 index++;
                 ups();
               } else {
+                that.his.loading = false;
                 that.$Message.warning(res.data.err_msg);
               }
             })
             .catch(res => {
               // console.log(res);
-              that.$Message.warning('上传失败');
+              that.loading = false;
+              that.$Message.warning('图片上传失败');
             });
         };
       }
@@ -211,7 +218,7 @@ export default {
             update_time: targeDate,
             article_zan: JSON.stringify([]),
             article_star: JSON.stringify([]),
-            artcle_images: JSON.stringify(this.imgs),
+            article_images: JSON.stringify(this.imgs),
             ext_data: JSON.stringify({
               showArticle: true
             })
@@ -226,9 +233,23 @@ export default {
           console.log(res);
           if (res.data.err_code == 0) {
             this.$Message.success("发布成功");
+            this.title = "";
+            this.title1 = "";
+            this.formArticle = "";
+            this.maxLength = 10;
+            this.blobArr = [];
+            this.fileArr = [];
+            this.upIndex = 0;
+            this.upNum = 0;
+            this.imgs = [];
+            this.loading = false;
+            this.$router.push({
+              path: '/index/article'
+            })
           }
         })
         .catch(res => {
+          this.loading = false;
           console.log(res);
         });
     },

@@ -18,7 +18,7 @@
         <div class="index_bread">
           <Breadcrumb>
             <BreadcrumbItem to="/index/article">主页</BreadcrumbItem>
-            <BreadcrumbItem to="/index/editor">文章编辑</BreadcrumbItem>
+            <!-- <BreadcrumbItem to="/index/editor">文章编辑</BreadcrumbItem> -->
             <!-- <BreadcrumbItem>主页分类3</BreadcrumbItem> -->
           </Breadcrumb>
         </div>

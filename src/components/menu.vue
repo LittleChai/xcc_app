@@ -8,7 +8,9 @@
     <div class="menu_center">
       <v-scroll>
         <div class="menu_container">
-
+          <div class="menu_child">
+            
+          </div>
         </div>
       </v-scroll>
     </div>

@@ -64,6 +64,22 @@ export default new Router({
           meta: {
             index: 13
           },
+        },
+        {
+          path: '/index/menu',
+          name: 'menu',
+          component: resolve=>(require(["../components/menu"],resolve)),
+          meta: {
+            index: 13
+          },
+        },
+        {
+          path: '/index/music',
+          name: 'music',
+          component: resolve=>(require(["../components/music"],resolve)),
+          meta: {
+            index: 13
+          },
         }
       ]
     }

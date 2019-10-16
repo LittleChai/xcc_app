@@ -10,17 +10,22 @@
           <!-- <Icon size="24" type="ios-arrow-back" class="index_btns_back" /> -->
           <!-- <Icon size="24" type="ios-arrow-forward" class="index_btns_prev" /> -->
           <div class="index_btns_wrap">
-            <Button class="index-btn" icon="md-create" type="default" @click="toEditor">发帖</Button>
-            <Button class="index-btn" icon="ios-restaurant" type="primary" @click="pullArticle">菜谱</Button>
+
+            <Button class="index-btn" icon="ios-home" type="default" @click="toIndex">主页</Button>
+            <Button class="index-btn" icon="md-create" type="info" @click="toEditor">发帖</Button>
+            <Button class="index-btn" icon="ios-restaurant" type="primary" @click="toMenu">菜谱</Button>
+            <Button class="index-btn" icon="md-musical-note" type="success" @click="toMusic">音乐</Button>
           </div>
         </div>
 
         <div class="index_bread">
-          <Breadcrumb>
-            <BreadcrumbItem to="/index/article">主页</BreadcrumbItem>
+          <!-- <Icon size="25" type="ios-arrow-back" @click="upRouter" class="index_btns_back index_btns_hover" /> -->
+          <Breadcrumb style="font-size: 15px;"  @click="changeBread(index)" >
+            <BreadcrumbItem style="margin-left: 5px;" v-for="(item,index) in routerArr"  :key="index">{{item.name}}</BreadcrumbItem>
             <!-- <BreadcrumbItem to="/index/editor">文章编辑</BreadcrumbItem> -->
             <!-- <BreadcrumbItem>主页分类3</BreadcrumbItem> -->
           </Breadcrumb>
+          <!-- <Icon size="25" type="ios-arrow-forward" @click="downRouter" class="index_btns_prev index_btns_hover" /> -->
         </div>
         <div class="index_router">
           <v-scroll>
@@ -59,14 +64,92 @@ export default {
   data() {
     return {
       tName: "t_left",
-      userInfo: {}
+      userInfo: {},
+      routerArr: [
+        {
+          name: '主页',
+          path: '/index/article'
+        }
+      ]
     };
   },
   methods: {
+    upRouter() {
+      console.log(this.$store.state.routerUp)
+      let arr = this.$store.state.routerUp[this.$store.state.routerUp.length-1];
+      this.$store.commit('addPath',arr); 
+      this.$store.state.routerUp.pop();
+    },
+
+    downRouter() {
+      console.log(this.$store.state.routerDown)
+    },
+    changeBread(val) {
+      console.log(val)
+    },
+
+    toIndex() {
+      this.$router.push({
+        path: '/index/article'
+      })
+      let arr = [
+        {
+          name: '主页',
+          path: '/index/article'
+        }
+      ]
+      this.routerArr = arr;
+    },
+
     toEditor() {
       this.$router.push({
         path: '/index/editor'
       })
+      let arr = [
+        {
+          name: '主页',
+          path: '/index/article'
+        },
+        {
+          name: '发帖',
+          path: '/index/editor'
+        }
+      ]
+      this.routerArr = arr;
+      // this.$store.commit('addUp',this.$store.state.routerPath); 
+      // this.$store.commit('addPath',arr); 
+    },
+    toMenu() {
+      this.$router.push({
+        path: '/index/menu'
+      })
+      let arr = [
+        {
+          name: '主页',
+          path: '/index/article'
+        },
+        {
+          name: '菜谱',
+          path: '/index/menu'
+        }
+      ]
+      this.routerArr = arr;
+    },
+    toMusic() {
+      this.$router.push({
+        path: '/index/music'
+      })
+      let arr = [
+        {
+          name: '主页',
+          path: '/index/article'
+        },
+        {
+          name: '音乐',
+          path: '/index/music'
+        }
+      ]
+      this.routerArr = arr;
     },
     getUserInfo() {
       if (localStorage.getItem("info")) {
@@ -205,7 +288,7 @@ body {
     // background-color: rgba(255, 255, 255, 0.8);
     position: relative;
     transition: all 0.1s ease;
-  }
+  }  
 }
 
 // 中间部分
@@ -231,6 +314,31 @@ body {
     padding: 0 10px;
     // border-bottom: $borderBottom;
     border-radius: 8px;
+
+    .index_btns_back {
+      position: absolute;
+      left: 5px;
+      top: 13px;
+      color: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+    }
+
+    .index_btns_prev {
+      position: absolute;
+      right: 5px;
+      top: 13px;
+      color: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+    }
+
+    .index_btns_hover {
+      transition: all .2s ease;
+    }
+
+    .index_btns_hover:hover {
+      color: white;
+    }
+
   }
 
   .index_btns {

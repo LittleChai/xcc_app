@@ -111,10 +111,10 @@ export default {
   .article_child {
     width: 88%;
     height: auto;
-    margin: 0px auto 40px auto;
+    margin: 0px auto 20px auto;
     padding: 15px 10px 0 10px;
     box-sizing: border-box;
-    background-color: rgba(255, 255, 255, 1);
+    background-color: rgba(255, 255, 255, 0.2);
 
     .article_header {
       width: 100%;
@@ -210,7 +210,7 @@ export default {
           right: -20px;
           top: 0;
           height: 1px;
-          background-color: rgba(240, 240, 240, 1);
+          background-color: rgba(255, 255, 255, 0.4);
         }
 
         .article_center_icon {
